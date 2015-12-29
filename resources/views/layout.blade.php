@@ -33,7 +33,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/">Inicio</a></li>
-            <li><a href="">Pacientes</a></li>
+            <li><a href="{{route('pacientes')}}">Pacientes</a></li>
             <li><a href="">Empresas</a></li>
             <li><a href="">Atenciones</a></li>
             <li><a href="">Agenda</a></li>
