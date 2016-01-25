@@ -27,3 +27,10 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('pacientes', ['as'=>'pacientes','uses'=>'PatientsController@index']);
 Route::get('pacientes/registrar', ['as'=>'crear-pacientes','uses'=>'PatientsController@create']);
 Route::post('pacientes/registrar', ['as'=>'guardar-pacientes','uses'=>'PatientsController@store']);
+//Empresas
+Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
+Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);
+Route::post('empresas/registrar', ['as'=>'guarda-empresa','uses'=>'CompanyController@store']);
+//Atenciones
+Route::get('atenciones', ['as'=>'atenciones','uses'=>'AtentionController@index']);
+Route::get('atenciones/registrar', ['as'=>'crear-atencion','uses'=>'AtentionController@create']);

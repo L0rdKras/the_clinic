@@ -17,8 +17,14 @@
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('patientName', 'Nombre',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('patientName',null,array('id'=>'patient_name','class'=>'col-md-2')); !!}
+		        		{!! Form::label('firstName', 'Nombres',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('firstName',null,array('id'=>'firstname','class'=>'col-md-2')); !!}
+					    </h4>
+				    </div>
+				    <div class="row">
+	        			<h4>
+		        		{!! Form::label('lastName', 'Apellidos',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('lastName',null,array('id'=>'lastname','class'=>'col-md-2')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
