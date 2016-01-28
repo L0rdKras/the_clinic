@@ -49,7 +49,8 @@
 				    <div class="row">
 	        			<h4>
 		        		{!! Form::label('month', 'Mes Cambio Cobertura',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('month',null,array('id'=>'month','class'=>'col-md-2 campoIngreso')); !!}
+					    
+					    {!! Form::select('month', $months, null, array('id'=>'month','class'=>'col-md-2 campoIngreso') ); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
@@ -62,6 +63,22 @@
         </div>
     </div>
 </div>
+<template id="modalTemplate">
+	<div class="modal fade bs-example-modal-lg" id="modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Sistema Clinica</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>:MENSAJE</p>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+</template>
 @endsection
 
 @section('scripts')
@@ -95,7 +112,22 @@ var guardarEmpresa = function(){
 			//borrar los alert
 			cleanAlerts("formEmpresa");
 			if(response.respuesta!=undefined){
-				console.log(response.respuesta);
+				var modalWindow = $('#modalTemplate').html();
+				if(response.respuesta==="Guardado"){
+					//informar y recargar
+					modalWindow = modalWindow.replace(':MENSAJE','Empresa Guardada');
+					$(modalWindow).modal({
+					  keyboard: false/*,
+					  backdrop: 'static'*/
+					});
+				}else{
+					//informar error
+					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
+					$(modalWindow).modal({
+					  keyboard: false/*,
+					  backdrop: 'static'*/
+					});
+				}
 			}else{
 				$("#formEmpresa .campoIngreso").each(function (index) 
         		{
@@ -117,7 +149,7 @@ var cleanAlerts = function(object){
 var showError = function(fieldName,response){
 	if(response[fieldName]!=undefined){
 		//console.log(response[fieldName][0]);
-		$("#"+fieldName).after('<div class="alert alert-danger" role="alert">'+response[fieldName][0]+'</div>');
+		$("#"+fieldName).after('<div class="label alert alert-danger" role="alert">'+response[fieldName][0]+'</div>');
 	}
 };
 

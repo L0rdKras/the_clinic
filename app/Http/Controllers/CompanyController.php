@@ -33,7 +33,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.registerForm');
+        $months = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        return view('company.registerForm',compact('months'));
     }
 
     /**
@@ -45,29 +46,40 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
         $input = $request->only(['name','rut','phone','email','benefit','amount','month']);
+        
+        $count = Company::where('rut','=', $input['rut'])->count();
 
-        $rules = [
-                'name'=>'required',
-                'rut'=>'required',
-                'phone'=>'required',
-                'email'=>'required|email',
-                'benefit'=>'required|numeric',
-                'amount'=>'required|numeric',
-                'month'=>'required'
-            ];
-
-        $validation = \Validator::make($input,$rules);
-
-        if($validation->passes())
+        if($count == 0)
         {
-            $company = new Company($input);
+            //
+            $rules = [
+                    'name'=>'required',
+                    'rut'=>'required',
+                    'phone'=>'required',
+                    'email'=>'required|email',
+                    'benefit'=>'required|numeric',
+                    'amount'=>'required|numeric',
+                    'month'=>'required|numeric|min:1'
+                ];
 
-            return response()->json(["respuesta"=>"Guardado"]);
+            $validation = \Validator::make($input,$rules);
+
+            if($validation->passes())
+            {
+                $company = new Company($input);
+
+                $company->save();
+
+                return response()->json(["respuesta"=>"Guardado"]);
+            }
+
+            $messages = $validation->errors();
+
+            return response()->json($messages);
         }
 
-        $messages = $validation->errors();
+        return response()->json(["respuesta"=>"Ese rut ya esta registrado"]);
 
-        return response()->json($messages);
     }
 
     /**
