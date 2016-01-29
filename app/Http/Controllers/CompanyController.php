@@ -126,4 +126,11 @@ class CompanyController extends Controller
     {
         //
     }
+
+    public function companys_list()
+    {
+        $companys = Company::orderBy('name')->paginate(10);
+
+        return view('company.list',compact('companys'));
+    }
 }

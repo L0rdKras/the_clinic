@@ -31,6 +31,7 @@ Route::post('pacientes/registrar', ['as'=>'guardar-pacientes','uses'=>'PatientsC
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);
 Route::post('empresas/registrar', ['as'=>'guarda-empresa','uses'=>'CompanyController@store']);
+Route::get('empresas/listado', ['as'=>'lista-empresas','uses'=>'CompanyController@companys_list']);
 //Atenciones
 Route::get('atenciones', ['as'=>'atenciones','uses'=>'AtentionController@index']);
 Route::get('atenciones/registrar', ['as'=>'crear-atencion','uses'=>'AtentionController@create']);

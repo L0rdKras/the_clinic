@@ -117,16 +117,14 @@ var guardarEmpresa = function(){
 					//informar y recargar
 					modalWindow = modalWindow.replace(':MENSAJE','Empresa Guardada');
 					$(modalWindow).modal({
-					  keyboard: false/*,
-					  backdrop: 'static'*/
+					  keyboard: false,
+					  backdrop: 'static'
 					});
+					setTimeout(location.reload(), 5000);
 				}else{
 					//informar error
 					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
-					$(modalWindow).modal({
-					  keyboard: false/*,
-					  backdrop: 'static'*/
-					});
+					$(modalWindow).modal();
 				}
 			}else{
 				$("#formEmpresa .campoIngreso").each(function (index) 
