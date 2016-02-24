@@ -27,6 +27,8 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('pacientes', ['as'=>'pacientes','uses'=>'PatientsController@index']);
 Route::get('pacientes/registrar', ['as'=>'crear-pacientes','uses'=>'PatientsController@create']);
 Route::post('pacientes/registrar', ['as'=>'guardar-pacientes','uses'=>'PatientsController@store']);
+Route::get('pacientes/seleccion/empresa', ['as'=>'show-companys-patients','uses'=>'PatientsController@companysToAdd']);
+Route::get('pacientes/seleccion/titular', ['as'=>'show-incumbents-patients','uses'=>'PatientsController@incumbentsToAdd']);
 //Empresas
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);

@@ -12,11 +12,11 @@ class Company extends Model {
 	/*public function supplier()
 	{
 		return $this->belongsTo('App\Supplier');
-	}
-
-	public function purchasedetails()
-	{
-		return $this->hasMany('App\PurchaseDetail');
 	}*/
+
+	public function Patiens()
+	{
+		//return $this->hasMany('App\Patients');
+	}
 
 }

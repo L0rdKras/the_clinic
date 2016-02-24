@@ -15,7 +15,7 @@
 		                <th>Rut</th>
 		                <th>Nombre</th>
 		                <th>Telefono</th>
-		                <th>Mail</th>
+		                <th>Info</th>
 		              </tr>
 		            </thead>
 		            <tbody>

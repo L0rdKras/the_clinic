@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Company;
+use App\Patient;
+
 class PatientsController extends Controller
 {
     /**
@@ -89,5 +92,21 @@ class PatientsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function companysToAdd(){
+        $companys = Company::orderBy('name')->get();
+
+        $vista = view('patients.listOfCompanys',compact('companys'));
+
+        return $vista;
+    }
+
+    public function incumbentsToAdd(){
+        $incumbents = Patient::where('type','=','Titular')->orderBy('firstname')->get();
+
+        $vista = view('patients.listOfIncumbents',compact('incumbents'));
+
+        return $vista;
     }
 }
