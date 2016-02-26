@@ -46,7 +46,51 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        echo "guarda post";
+        $input = $request->only(['firstname','lastname','address','rut','phone','email','type']);
+
+        $data = $request->only(['dataToSave']);
+
+        $rules = [
+                    'firstname'=>'required',
+                    'lastname'=>'required',
+                    'address'=>'required',
+                    'rut'=>'required',
+                    'phone'=>'required',
+                    'email'=>'required|email',
+                    'type'=>'required',
+                    'company_id'=>'required|numeric'
+                ];
+
+        if($input['type'] == "Titular")
+        {
+            $input['company_id'] = $data['dataToSave'];
+
+            $validation = \Validator::make($input,$rules);
+
+            if($validation->passes())
+            {
+
+                $patient = new Patient($input);
+
+                $patient->save();
+
+                return response()->json(["respuesta"=>"Guardado"]);
+            }
+
+            $messages = $validation->errors();
+
+            return response()->json($messages);
+
+
+        }elseif ($input['type'] == "Carga") {
+            $incumbent = Patient::find($data['dataToSave']);
+
+            $input['company_id'] = $incumbent->Company->id;
+
+            //crear relacion
+        }else{
+            //error, no especifico el tipo
+        }
     }
 
     /**

@@ -5,7 +5,28 @@ $(document).ready(function() {
 	seleccionTipo();
 	seleccionEmpresa();
 
+	guardaTitular();
+
 });
+
+var guardaTitular = function(){
+	$("#formPatient #complementaryData").on('click',"#dataEmpresa h3 #btn-guarda-titular",function(e){
+		e.preventDefault();
+
+		var form = $("#formPatient");
+		var formRuta = $("#formSaveIncumbents");
+
+		var url = formRuta.attr('action');
+
+		var data = form.serialize();
+
+		$.post(url,data,function(response){
+			console.log(response);
+		}).fail(function(){
+			alert("Ocurrio un error al intentar guardar la informacion");
+		});
+	});
+};
 
 var seleccionTipo = function()
 {
@@ -97,6 +118,8 @@ var cargarDataEmpresa = function(objeto){
 	var idEmpresa = $(objeto).data("id");
 	var nombreEmpresa = $(objeto).data("name");
 
+	$("#dataToSave").val(idEmpresa);
+
 	var vista = "<div id='dataEmpresa'><h3><label class='label label-info'>Empresa a la que Pertenece: "+nombreEmpresa+"</label></h3><input type='hidden' id='idEmpresaTitular' value='"+idEmpresa+"' /><h3><button class='btn btn-success' id='btn-guarda-titular'>Guardar</button></h3></div>";
 
 	$("#dataEmpresa").remove();
@@ -109,6 +132,8 @@ var cargarDataEmpresa = function(objeto){
 var cargarDataTitular = function(objeto){
 	var idTitular = $(objeto).data("id");
 	var nombreTitular = $(objeto).data("name");
+
+	$("#dataToSave").val(idTitular);
 
 	var vista = "<div id='dataTitular'><h3><label class='label label-info'>Es carga de: "+nombreEmpresa+"</label></h3><input type='hidden' id='idEmpresaTitular' value='"+idEmpresa+"' /><h3><button class='btn btn-success' id='btn-guarda-carga'>Guardar</button></h3></div>";
 
@@ -124,12 +149,13 @@ var guardarPaciente = function(){
 		event.preventDefault();
 		//1.- validar campos
 		var rut = $("#rut").val();
-		var nombre = $('#name').val();
+		var first = $('#firstname').val();
+		var last = $('#lastname').val();
 		var telefono = $('#phone').val();
 		var email = $('#email').val();
-		var monto = $('#amount').val();
-		var porcentaje = $('#benefit').val();
-		var mes = $('#month').val();
+		
+		var tipo = $('#type').val();
+		
 		//2.- cargar data del form
 		var form = $("#formEmpresa");
 

@@ -8,7 +8,8 @@
 
   			<div class="panel-heading">Datos</div>
   			<div class="panel-body">
-	        	{!! Form::open(array('url' => 'foo/bar')) !!}
+	        	{!! Form::open(array('id'=>'formPatient','route' => ['guarda-empresa'],'method'=>'POST')) !!}
+	        		{!! Form::hidden('dataToSave','null',array('id'=>'dataToSave')) !!}
 	        		<div class="row">
 	        			<h4>
 		        		{!! Form::label('rut', 'Rut',array('class' => 'label label-default col-md-2')); !!}
@@ -29,20 +30,20 @@
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('patientAddress', 'Direccion',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('patientAddress',null,array('id'=>'patient_address','class'=>'col-md-2')); !!}
+		        		{!! Form::label('address', 'Direccion',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('address',null,array('id'=>'address','class'=>'col-md-2')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('patientPhone', 'Telefono',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('patientPhone',null,array('id'=>'patient_phone','class'=>'col-md-2')); !!}
+		        		{!! Form::label('phone', 'Telefono',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('phone',null,array('id'=>'phone','class'=>'col-md-2')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('patientEmail', 'Email',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::email('patientEmail',null,array('id'=>'patient_email','class'=>'col-md-2')); !!}
+		        		{!! Form::label('email', 'Email',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::email('email',null,array('id'=>'email','class'=>'col-md-2')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
@@ -100,6 +101,8 @@
 {!! Form::open(array('route' => ['show-companys-patients'],'id'=>'formCompanys','method'=>'GET')) !!}
 {!! Form::close() !!}
 {!! Form::open(array('route' => ['show-incumbents-patients'],'id'=>'formIncumbents','method'=>'GET')) !!}
+{!! Form::close() !!}
+{!! Form::open(array('route' => ['save-incumbents-patients'],'id'=>'formSaveIncumbents','method'=>'POST')) !!}
 {!! Form::close() !!}
 
 @endsection
