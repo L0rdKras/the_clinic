@@ -4,6 +4,7 @@ $(document).ready(function() {
 	dejarRut();
 	seleccionTipo();
 	seleccionEmpresa();
+	seleccionTitular();
 
 	guardaTitular();
 
@@ -20,11 +21,41 @@ var guardaTitular = function(){
 
 		var data = form.serialize();
 
-		$.post(url,data,function(response){
+		/*$.post(url,data,function(response){
 			console.log(response);
 		}).fail(function(){
 			alert("Ocurrio un error al intentar guardar la informacion");
-		});
+		});*/
+		$.post(url,data,function(response){
+			//borrar los alert
+			cleanAlerts("formPatient");
+			if(response.respuesta!=undefined){
+				var modalWindow = $('#modalTemplate').html();
+				if(response.respuesta==="Guardado"){
+					//informar y recargar
+					modalWindow = modalWindow.replace(':MENSAJE','Empresa Guardada');
+					$(modalWindow).modal({
+					  keyboard: false,
+					  backdrop: 'static'
+					});
+					setTimeout(location.reload(), 5000);
+				}else{
+					//informar error
+					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
+					$(modalWindow).modal();
+				}
+			}else{
+				$("#formPatient .campoIngreso").each(function (index) 
+        		{
+        			var id_name = this.id;
+
+        			showError(id_name,response);
+        			
+        		});
+			}
+		},'json').fail(function(){
+			alert("Ocurrio un error al intentar guardar la informacion");
+		});;
 	});
 };
 
@@ -64,6 +95,7 @@ var buscarEmpresa = function(){
 			//console.log(data);
 			$("#tablaResultado .detalleBusqueda").remove();
 			$("#tablaResultado").append(data).promise().done(function(){
+				$("#TituloModal").html("Buscar Empresa");
 				$('#modal_buscar').modal();
 			});
 		}).fail(function(){
@@ -85,6 +117,7 @@ var buscaTitular = function(){
 			//console.log(data);
 			$("#tablaResultado .detalleBusqueda").remove();
 			$("#tablaResultado").append(data).promise().done(function(){
+				$("#TituloModal").html("Buscar Titular");
 				$('#modal_buscar').modal();
 			});
 		}).fail(function(){
@@ -135,65 +168,16 @@ var cargarDataTitular = function(objeto){
 
 	$("#dataToSave").val(idTitular);
 
-	var vista = "<div id='dataTitular'><h3><label class='label label-info'>Es carga de: "+nombreEmpresa+"</label></h3><input type='hidden' id='idEmpresaTitular' value='"+idEmpresa+"' /><h3><button class='btn btn-success' id='btn-guarda-carga'>Guardar</button></h3></div>";
+	var vista = "<div id='dataEmpresa'><h3><label class='label label-info'>Es carga de: "+nombreTitular+"</label></h3><input type='hidden' id='idEmpresaTitular' value='"+idTitular+"' /><h3><button class='btn btn-success' id='btn-guarda-titular'>Guardar</button></h3></div>";
 
 	$("#dataTitular").remove();
 	$("#dataEmpresa").remove();
 
 	$("#complementaryData").append(vista);
 	$('#modal_buscar').modal('hide');
+
 };
 
-var guardarPaciente = function(){
-	$("#guardar").on('click',function(event){
-		event.preventDefault();
-		//1.- validar campos
-		var rut = $("#rut").val();
-		var first = $('#firstname').val();
-		var last = $('#lastname').val();
-		var telefono = $('#phone').val();
-		var email = $('#email').val();
-		
-		var tipo = $('#type').val();
-		
-		//2.- cargar data del form
-		var form = $("#formEmpresa");
-
-		var url = form.attr('action');
-
-		var data = form.serialize();
-
-		$.post(url,data,function(response){
-			//borrar los alert
-			cleanAlerts("formEmpresa");
-			if(response.respuesta!=undefined){
-				var modalWindow = $('#modalTemplate').html();
-				if(response.respuesta==="Guardado"){
-					//informar y recargar
-					modalWindow = modalWindow.replace(':MENSAJE','Empresa Guardada');
-					$(modalWindow).modal({
-					  keyboard: false,
-					  backdrop: 'static'
-					});
-					setTimeout(location.reload(), 5000);
-				}else{
-					//informar error
-					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
-					$(modalWindow).modal();
-				}
-			}else{
-				$("#formEmpresa .campoIngreso").each(function (index) 
-        		{
-        			var id_name = this.id;
-
-        			showError(id_name,response);
-        			
-        		});
-			}
-		},'json');
-
-	});
-};
 
 var cleanAlerts = function(object){
 	$("#"+object+" .alert").remove();

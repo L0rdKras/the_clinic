@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Company;
 use App\Patient;
+use App\Relationship;
 
 class PatientsController extends Controller
 {
@@ -87,7 +88,30 @@ class PatientsController extends Controller
 
             $input['company_id'] = $incumbent->Company->id;
 
-            //crear relacion
+            $validation = \Validator::make($input,$rules);
+
+            if($validation->passes())
+            {
+
+                $patient = new Patient($input);
+
+                $patient->save();
+
+                //crear relacion
+
+                $inputRelationship = ['incumbent'=>$incumbent->id,'burden'=>$patient->id];
+
+                $relationship = new Relationship($inputRelationship);
+
+                $relationship->save();
+
+                return response()->json(["respuesta"=>"Guardado"]);
+            }
+
+            $messages = $validation->errors();
+
+            return response()->json($messages);
+
         }else{
             //error, no especifico el tipo
         }
@@ -152,5 +176,12 @@ class PatientsController extends Controller
         $vista = view('patients.listOfIncumbents',compact('incumbents'));
 
         return $vista;
+    }
+
+    public function patients_list()
+    {
+        $patients = Patient::orderBy('firstname')->paginate(10);
+
+        return view('patients.list',compact('patients'));
     }
 }

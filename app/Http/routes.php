@@ -30,6 +30,7 @@ Route::get('pacientes/registrar', ['as'=>'crear-pacientes','uses'=>'PatientsCont
 Route::get('pacientes/seleccion/empresa', ['as'=>'show-companys-patients','uses'=>'PatientsController@companysToAdd']);
 Route::get('pacientes/seleccion/titular', ['as'=>'show-incumbents-patients','uses'=>'PatientsController@incumbentsToAdd']);
 Route::post('pacientes/guardar/titular',['as'=>'save-incumbents-patients','uses'=>'PatientsController@store']);
+Route::get('pacientes/listado', ['as'=>'lista-pacientes','uses'=>'PatientsController@patients_list']);
 //Empresas
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);

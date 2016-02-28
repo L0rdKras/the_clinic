@@ -13,43 +13,43 @@
 	        		<div class="row">
 	        			<h4>
 		        		{!! Form::label('rut', 'Rut',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('rut',null,array('id'=>'rut','class'=>'col-md-2')); !!}
+					    {!! Form::text('rut',null,array('id'=>'rut','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('firstName', 'Nombres',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('firstName',null,array('id'=>'firstname','class'=>'col-md-2')); !!}
+		        		{!! Form::label('firstname', 'Nombres',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('firstname',null,array('id'=>'firstname','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('lastName', 'Apellidos',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('lastName',null,array('id'=>'lastname','class'=>'col-md-2')); !!}
+		        		{!! Form::label('lastname', 'Apellidos',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('lastname',null,array('id'=>'lastname','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
 		        		{!! Form::label('address', 'Direccion',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('address',null,array('id'=>'address','class'=>'col-md-2')); !!}
+					    {!! Form::text('address',null,array('id'=>'address','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
 		        		{!! Form::label('phone', 'Telefono',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::text('phone',null,array('id'=>'phone','class'=>'col-md-2')); !!}
+					    {!! Form::text('phone',null,array('id'=>'phone','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
 		        		{!! Form::label('email', 'Email',array('class' => 'label label-default col-md-2')); !!}
-					    {!! Form::email('email',null,array('id'=>'email','class'=>'col-md-2')); !!}
+					    {!! Form::email('email',null,array('id'=>'email','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
 	        			<h4>
 		        		{!! Form::label('type', 'Tipo',array('class' => 'label label-default col-md-2')); !!}
-		        		{!! Form::select('type', array('' => '', 'Titular' => 'Titular', 'Carga' => 'Carga')); !!}
+		        		{!! Form::select('type', array('' => '', 'Titular' => 'Titular', 'Carga' => 'Carga') , null, array('id'=>'type','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
 				    <div id="complementaryData" class="row"></div>
@@ -64,7 +64,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">Busca Empresa</h4>
+	        <h4 class="modal-title" id="TituloModal">:TITULO</h4>
 	      </div>
 	      
 	      <div class="modal-body" style="height:300px; overflow:auto" id="ver_articulos">

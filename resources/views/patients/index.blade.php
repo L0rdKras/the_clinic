@@ -7,7 +7,7 @@
         <div class="panel panel-primary col-md-6">
             <div class="list-group">
             	<a href="{{route('crear-pacientes')}}" class="list-group-item">Registrar</a>
-            	<a href="#" class="list-group-item">Ver Lista</a>
+            	<a href="{{route('lista-pacientes')}}" class="list-group-item">Ver Lista</a>
             </div>
         </div>
     </div>
