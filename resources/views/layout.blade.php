@@ -36,6 +36,7 @@
             <li><a href="{{route('pacientes')}}">Pacientes</a></li>
             <li><a href="{{route('empresas')}}">Empresas</a></li>
             <li><a href="{{route('atenciones')}}">Atenciones</a></li>
+            <li><a href="{{route('profecionales')}}">Profecionales</a></li>
             <li><a href="">Agenda</a></li>
             <?php
             if (Auth::guest()){

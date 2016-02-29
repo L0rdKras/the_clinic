@@ -97,6 +97,22 @@
 		<button id="btnSelectIncumbent" class="btn btn-default">Selecciona Titular</button>
 	</h4>
 </template>
+<template id="modalTemplate">
+	<div class="modal fade bs-example-modal-lg" id="modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Sistema Clinica</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>:MENSAJE</p>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+</template>
 
 {!! Form::open(array('route' => ['show-companys-patients'],'id'=>'formCompanys','method'=>'GET')) !!}
 {!! Form::close() !!}

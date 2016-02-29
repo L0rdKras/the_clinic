@@ -7,23 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Atention;
+use App\Medic;
 
-class AtentionController extends Controller
+class MedicController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('atention.index');
+        return view('medic.index');
     }
 
     /**
@@ -33,7 +28,7 @@ class AtentionController extends Controller
      */
     public function create()
     {
-        return view('atention.registerForm');
+        return view('medic.registerForm');
     }
 
     /**
@@ -44,20 +39,22 @@ class AtentionController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only(['name','block_numbers']);
-
+        //
+        $input = $request->only(['name','speciality']);
+        
+        
         $rules = [
                 'name'=>'required',
-                'block_numbers'=>'required|numeric',
+                'speciality'=>'required'
             ];
 
         $validation = \Validator::make($input,$rules);
 
         if($validation->passes())
         {
-            $atention = new Atention($input);
+            $medic = new Medic($input);
 
-            $atention->save();
+            $medic->save();
 
             return response()->json(["respuesta"=>"Guardado"]);
         }
@@ -65,6 +62,7 @@ class AtentionController extends Controller
         $messages = $validation->errors();
 
         return response()->json($messages);
+        
     }
 
     /**
@@ -111,10 +109,11 @@ class AtentionController extends Controller
     {
         //
     }
-    public function atentions_list()
-    {
-        $atentions = Atention::orderBy('name')->paginate(10);
 
-        return view('atention.list',compact('atentions'));
+    public function medics_list()
+    {
+        $medics = Medic::orderBy('name')->paginate(10);
+
+        return view('medic.list',compact('medics'));
     }
 }

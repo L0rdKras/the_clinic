@@ -33,7 +33,7 @@ var guardaTitular = function(){
 				var modalWindow = $('#modalTemplate').html();
 				if(response.respuesta==="Guardado"){
 					//informar y recargar
-					modalWindow = modalWindow.replace(':MENSAJE','Empresa Guardada');
+					modalWindow = modalWindow.replace(':MENSAJE','Paciente Guardado');
 					$(modalWindow).modal({
 					  keyboard: false,
 					  backdrop: 'static'
@@ -55,7 +55,7 @@ var guardaTitular = function(){
 			}
 		},'json').fail(function(){
 			alert("Ocurrio un error al intentar guardar la informacion");
-		});;
+		});
 	});
 };
 

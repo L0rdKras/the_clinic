@@ -29,7 +29,7 @@ Route::get('pacientes/registrar', ['as'=>'crear-pacientes','uses'=>'PatientsCont
 //Route::post('pacientes/registrar', ['as'=>'guardar-pacientes','uses'=>'PatientsController@store']);
 Route::get('pacientes/seleccion/empresa', ['as'=>'show-companys-patients','uses'=>'PatientsController@companysToAdd']);
 Route::get('pacientes/seleccion/titular', ['as'=>'show-incumbents-patients','uses'=>'PatientsController@incumbentsToAdd']);
-Route::post('pacientes/guardar/titular',['as'=>'save-incumbents-patients','uses'=>'PatientsController@store']);
+Route::post('pacientes/guardar',['as'=>'save-incumbents-patients','uses'=>'PatientsController@store']);
 Route::get('pacientes/listado', ['as'=>'lista-pacientes','uses'=>'PatientsController@patients_list']);
 //Empresas
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
@@ -39,3 +39,10 @@ Route::get('empresas/listado', ['as'=>'lista-empresas','uses'=>'CompanyControlle
 //Atenciones
 Route::get('atenciones', ['as'=>'atenciones','uses'=>'AtentionController@index']);
 Route::get('atenciones/registrar', ['as'=>'crear-atencion','uses'=>'AtentionController@create']);
+Route::post('atenciones/registrar', ['as'=>'guarda-atencion','uses'=>'AtentionController@store']);
+Route::get('atenciones/listado', ['as'=>'lista-atenciones','uses'=>'AtentionController@atentions_list']);
+//Profecionales
+Route::get('profecionales',['as'=>'profecionales','uses'=>'MedicController@index']);
+Route::get('profecionales/registrar',['as'=>'crear-profecional','uses'=>'MedicController@create']);
+Route::post('profecionales/registrar',['as'=>'guarda-profecional','uses'=>'MedicController@store']);
+Route::get('profecionales/listado',['as'=>'lista-profecionales','uses'=>'MedicController@medics_list']);
