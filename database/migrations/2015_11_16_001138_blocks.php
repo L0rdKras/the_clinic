@@ -14,6 +14,8 @@ class Blocks extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->increments('id');
+            $table->time('startBlock');
+            $table->time('finishBlock');
             $table->timestamps();
         });
     }

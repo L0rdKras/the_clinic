@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Medic;
+use App\Block;
 
-class MedicController extends Controller
+class ShedulleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,8 @@ class MedicController extends Controller
     }
     public function index()
     {
-        return view('medic.index');
+        //
+        return view('shedulle.index');
     }
 
     /**
@@ -32,7 +33,9 @@ class MedicController extends Controller
      */
     public function create()
     {
-        return view('medic.registerForm');
+        $blocks = Block::all();
+        $today = date("Y-m-d");
+        return view('shedulle.register',compact('today','blocks'));
     }
 
     /**
@@ -44,29 +47,6 @@ class MedicController extends Controller
     public function store(Request $request)
     {
         //
-        $input = $request->only(['name','speciality']);
-        
-        
-        $rules = [
-                'name'=>'required',
-                'speciality'=>'required'
-            ];
-
-        $validation = \Validator::make($input,$rules);
-
-        if($validation->passes())
-        {
-            $medic = new Medic($input);
-
-            $medic->save();
-
-            return response()->json(["respuesta"=>"Guardado"]);
-        }
-
-        $messages = $validation->errors();
-
-        return response()->json($messages);
-        
     }
 
     /**
@@ -112,12 +92,5 @@ class MedicController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function medics_list()
-    {
-        $medics = Medic::orderBy('name')->paginate(10);
-
-        return view('medic.list',compact('medics'));
     }
 }

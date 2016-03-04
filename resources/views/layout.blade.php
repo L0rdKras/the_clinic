@@ -37,7 +37,7 @@
             <li><a href="{{route('empresas')}}">Empresas</a></li>
             <li><a href="{{route('atenciones')}}">Atenciones</a></li>
             <li><a href="{{route('profecionales')}}">Profecionales</a></li>
-            <li><a href="">Agenda</a></li>
+            <li><a href="{{route('agenda')}}">Agenda</a></li>
             <?php
             if (Auth::guest()){
               //
@@ -58,6 +58,10 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="{{ asset('js/rut.js')}}"></script>
+  <!--calendario-->
+  <link type="text/css" rel="stylesheet" href="{{ asset('dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112') }}" media="screen"></LINK>
+  <script type="text/javascript" src="{{ asset('dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118')}}"></script>
+<!--calendario-->   
 
 	@yield('scripts')
 </body>

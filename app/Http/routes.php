@@ -31,6 +31,7 @@ Route::get('pacientes/seleccion/empresa', ['as'=>'show-companys-patients','uses'
 Route::get('pacientes/seleccion/titular', ['as'=>'show-incumbents-patients','uses'=>'PatientsController@incumbentsToAdd']);
 Route::post('pacientes/guardar',['as'=>'save-incumbents-patients','uses'=>'PatientsController@store']);
 Route::get('pacientes/listado', ['as'=>'lista-pacientes','uses'=>'PatientsController@patients_list']);
+Route::get('pacientes/lista', ['as'=>'lista-todos-pacientes','uses'=>'PatientsController@listAllPatients']);
 //Empresas
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);
@@ -46,3 +47,6 @@ Route::get('profecionales',['as'=>'profecionales','uses'=>'MedicController@index
 Route::get('profecionales/registrar',['as'=>'crear-profecional','uses'=>'MedicController@create']);
 Route::post('profecionales/registrar',['as'=>'guarda-profecional','uses'=>'MedicController@store']);
 Route::get('profecionales/listado',['as'=>'lista-profecionales','uses'=>'MedicController@medics_list']);
+//Agenda
+Route::get('agenda', ['as'=>'agenda','uses'=>'ShedulleController@index']);
+Route::get('agenda/registrar/hora', ['as'=>'registrar-hora','uses'=>'ShedulleController@create']);

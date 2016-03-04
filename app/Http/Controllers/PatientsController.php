@@ -184,4 +184,11 @@ class PatientsController extends Controller
 
         return view('patients.list',compact('patients'));
     }
+
+    public function listAllPatients()
+    {
+        $patients = Patient::orderBy('firstname')->get();
+
+        return response()->json($patients);
+    }
 }

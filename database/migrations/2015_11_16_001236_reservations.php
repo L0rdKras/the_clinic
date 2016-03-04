@@ -13,15 +13,19 @@ class Reservations extends Migration
     public function up()
     {
         Schema::create('reservations', function (Blueprint $table) {
+            
+
             $table->increments('id');
-            $table->date('reservation_date');
+            $table->date('reservationDate');
             $table->integer('patient_id')->unsigned();
             $table->integer('medic_id')->unsigned();
-            $table->integer('atention_id')->unsigned();
-            $table->time('start_hour');
-            $table->time('finish_hour');
-            $table->enum('status',['Reservada','Confirmada','Concretada','Cancelada','Ausente']);
+            $table->integer('atention_id')->unsigned();            
+            $table->string('status',30)->default('Reservada');
             $table->timestamps();
+
+            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('medic_id')->references('id')->on('medics');
+            $table->foreign('atention_id')->references('id')->on('atentions');
         });
     }
 
