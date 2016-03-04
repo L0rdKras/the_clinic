@@ -31,5 +31,12 @@ var seleccionaBloque = function(){
 var showModalPatients = function(){
 	$("#btnSearchPatient").on("click",function(e){
 		e.preventDefault();
+		var modal = $("#modal-confirmation").html();
+
+		var ruta = $("#rutaListaPacientes").val();
+
+		$.get(ruta,function(response){
+			console.log(response);
+		});
 	});
 };
