@@ -9,6 +9,8 @@
   			<div class="panel-heading">Datos</div>
   			<div class="panel-body">
   				<input type="hidden" id="rutaListaPacientes" value="{{route('lista-todos-pacientes')}}">
+  				<input type="hidden" id="rutaListaAtenciones" value="{{route('lista-todas-atenciones')}}">
+  				<input type="hidden" id="rutaListaProfecionales" value="{{route('lista-todos-profecionales')}}">
 	        	{!! Form::open(array('id'=>'formEmpresa','route' => ['guarda-empresa'],'method'=>'POST')) !!}
 	        		<div class="row">
 	        			<h4>
@@ -140,6 +142,24 @@
 			</thead>
 			<tbody>
 				<tr><td>:DATAATENCIONES</td></tr>
+			</tbody>
+		</table>
+		
+	</div>
+</template>
+
+<template id="tablaMostrarProfecionales">
+	<div style="height:400px; overflow:auto;">
+		<table class="table table-hover table-bordered" id="tablaElejirProfecionales">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Especialidad</th>
+					<th>Carga</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>:DATAPROFECIONALES</td></tr>
 			</tbody>
 		</table>
 		

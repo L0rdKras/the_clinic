@@ -117,4 +117,11 @@ class AtentionController extends Controller
 
         return view('atention.list',compact('atentions'));
     }
+
+    public function listAllAtentions()
+    {
+        $atentions = Atention::orderBy('name')->get();
+
+        return response()->json($atentions);
+    }
 }

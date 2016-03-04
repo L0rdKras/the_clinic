@@ -120,4 +120,11 @@ class MedicController extends Controller
 
         return view('medic.list',compact('medics'));
     }
+
+    public function listAllMedics()
+    {
+        $medics = Medic::orderBy('name')->get();
+
+        return response()->json($medics);
+    }
 }

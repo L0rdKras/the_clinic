@@ -4,8 +4,11 @@ $(document).ready(function() {
 	
 	showModalPatients();
 	showModalAtentions();
+	showModalMedics();
 
 	selectPatient();
+	selectAtention();
+	selectMedic();
 
 });
 
@@ -83,6 +86,31 @@ var showModalAtentions = function(){
 	});
 };
 
+var showModalMedics = function(){
+	$("#btnSearchMedic").on("click",function(e){
+		e.preventDefault();
+		var modalview = $("#modalTemplate").html();
+
+		var estructuraTabla = $("#tablaMostrarProfecionales").html();
+
+		var ruta = $("#rutaListaProfecionales").val();
+
+		$.getJSON(ruta,function(response){
+			var filas = "";
+			$.each(response, function(i,item){
+				//console.log(response[i].firstname);
+				filas = filas+"<tr data-id-medic='"+response[i].id+"' data-name-medic='"+response[i].name+"' ><th>"+response[i].name+"</th><th>"+response[i].speciality+"</th><th><a class='btn btn-warning botonCargaProfecional'>Carga</a></th></tr>";
+			});
+
+			estructuraTabla=estructuraTabla.replace('<tr><td>:DATAPROFECIONALES</td></tr>',filas);
+
+			modalview = modalview.replace(':MENSAJE',estructuraTabla);
+
+			$(modalview).modal();
+		});
+	});
+};
+
 var selectPatient = function(){
 	$("body").on('click',"#modal-confirmation #tablaElejirPaciente tbody tr th .botonCargaPaciente",function(e){
 		e.preventDefault();
@@ -94,5 +122,33 @@ var selectPatient = function(){
 		var nombre = abuelo.data('firstnamePatient')+" "+abuelo.data("lastnamePatient");
 
 		$("#patient").val(nombre);
+	});
+};
+
+var selectAtention = function(){
+	$("body").on('click',"#modal-confirmation #tablaElejirAtenciones tbody tr th .botonCargaAtencion",function(e){
+		e.preventDefault();
+		var objeto = $(this);
+
+		var padre = objeto.parent();
+		var abuelo = $(padre).parent();
+
+		var nombre = abuelo.data('nameAtention');
+
+		$("#atention").val(nombre);
+	});
+};
+
+var selectMedic = function(){
+	$("body").on('click',"#modal-confirmation #tablaElejirProfecionales tbody tr th .botonCargaProfecional",function(e){
+		e.preventDefault();
+		var objeto = $(this);
+
+		var padre = objeto.parent();
+		var abuelo = $(padre).parent();
+
+		var nombre = abuelo.data('nameMedic');
+
+		$("#medic").val(nombre);
 	});
 };

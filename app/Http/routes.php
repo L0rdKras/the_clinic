@@ -42,11 +42,13 @@ Route::get('atenciones', ['as'=>'atenciones','uses'=>'AtentionController@index']
 Route::get('atenciones/registrar', ['as'=>'crear-atencion','uses'=>'AtentionController@create']);
 Route::post('atenciones/registrar', ['as'=>'guarda-atencion','uses'=>'AtentionController@store']);
 Route::get('atenciones/listado', ['as'=>'lista-atenciones','uses'=>'AtentionController@atentions_list']);
+Route::get('atenciones/lista', ['as'=>'lista-todas-atenciones','uses'=>'AtentionController@listAllAtentions']);
 //Profecionales
 Route::get('profecionales',['as'=>'profecionales','uses'=>'MedicController@index']);
 Route::get('profecionales/registrar',['as'=>'crear-profecional','uses'=>'MedicController@create']);
 Route::post('profecionales/registrar',['as'=>'guarda-profecional','uses'=>'MedicController@store']);
 Route::get('profecionales/listado',['as'=>'lista-profecionales','uses'=>'MedicController@medics_list']);
+Route::get('profecionales/lista', ['as'=>'lista-todos-profecionales','uses'=>'MedicController@listAllMedics']);
 //Agenda
 Route::get('agenda', ['as'=>'agenda','uses'=>'ShedulleController@index']);
 Route::get('agenda/registrar/hora', ['as'=>'registrar-hora','uses'=>'ShedulleController@create']);
