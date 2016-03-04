@@ -109,6 +109,42 @@
 		</tbody>
 	</table>
 </template>
+
+<template id="tablaMostrarPacientes">
+	<div style="height:400px; overflow:auto;">
+		<table class="table table-hover table-bordered" id="tablaElejirPaciente">
+			<thead>
+				<tr>
+					<th>RUT</th>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Carga</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>:DATAPACIENTES</td></tr>
+			</tbody>
+		</table>
+		
+	</div>
+</template>
+
+<template id="tablaMostrarAtenciones">
+	<div style="height:400px; overflow:auto;">
+		<table class="table table-hover table-bordered" id="tablaElejirAtenciones">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Carga</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>:DATAATENCIONES</td></tr>
+			</tbody>
+		</table>
+		
+	</div>
+</template>
 @endsection
 
 @section('scripts')
