@@ -93,4 +93,9 @@ class ShedulleController extends Controller
     {
         //
     }
+
+    public function dataSelection($room,$block,$year,$month,$day,$atention,$medic)
+    {
+        return $room." ".$block." ".$year." ".$month." ".$day." ".$atention." ".$medic;
+    }
 }

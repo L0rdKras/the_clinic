@@ -52,3 +52,4 @@ Route::get('profecionales/lista', ['as'=>'lista-todos-profecionales','uses'=>'Me
 //Agenda
 Route::get('agenda', ['as'=>'agenda','uses'=>'ShedulleController@index']);
 Route::get('agenda/registrar/hora', ['as'=>'registrar-hora','uses'=>'ShedulleController@create']);
+Route::get('agenda/valida/seleccion/{room}/{block}/{year}/{month}/{day}/{atention}/{medic}',['as'=>'datos-hora-seleccionada','uses'=>'ShedulleController@dataSelection']);

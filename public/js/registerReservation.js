@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	cargaDia();
-	seleccionaBloque();
 	
 	showModalPatients();
 	showModalAtentions();
@@ -10,30 +9,49 @@ $(document).ready(function() {
 	selectAtention();
 	selectMedic();
 
+	clickHour();
+
 });
+
+var clickHour = function(){
+	$("body #muestraAgenda").on("dblclick","table tbody .filaAgenda",function(){
+		var dia = $("#fechaReserva").val();
+		var sala = $("#sala").val();
+		var objeto = $(this);
+		var idbloque = objeto.data("idBlock");
+		var idAtention = $("#atention_id").val();
+		var idMedic = $("#medic_id").val();
+
+		var formConsulta = $("#formConsulta");
+
+		var url = formConsulta.attr('action').replace(":ROOM",sala);
+		url = url.replace(":BLOCK",idbloque);
+		url = url.replace(":DATE",dia);
+		url = url.replace(":ATENTION",idAtention);
+		url = url.replace(":MEDIC",idMedic);
+
+		$.get(url,function(response){
+			console.log(response);
+		});
+	});
+};
 
 var cargaDia = function(){
 	$("#btnCargaDia").on("click",function(e){
 		e.preventDefault();
 		var dia = $("#fechaReserva").val();
+		var sala = $("#sala").val();
 
-		if(dia != ""){
-			muestraInfoDia(dia);
+		if(dia != "" && sala != ""){
+			muestraInfoDia(dia,sala);
 		}
 	});
 };
 
-var muestraInfoDia = function(dia){
+var muestraInfoDia = function(dia,sala){
 	var tabla = $("#tablaDia").html();
 
 	$("#muestraAgenda").html(tabla);
-};
-
-var seleccionaBloque = function(){
-	$("#muestraAgenda").on("dblclick","table tbody .filaAgenda",function(){
-		var objeto = $(this);
-		//console.log(objeto.data("idBlock"));
-	});
 };
 
 var showModalPatients = function(){
@@ -122,6 +140,7 @@ var selectPatient = function(){
 		var nombre = abuelo.data('firstnamePatient')+" "+abuelo.data("lastnamePatient");
 
 		$("#patient").val(nombre);
+		$("#patient_id").val(abuelo.data('idPAtient'));
 	});
 };
 
@@ -136,6 +155,7 @@ var selectAtention = function(){
 		var nombre = abuelo.data('nameAtention');
 
 		$("#atention").val(nombre);
+		$("#atention_id").val(abuelo.data('idAtention'));
 	});
 };
 
@@ -150,5 +170,6 @@ var selectMedic = function(){
 		var nombre = abuelo.data('nameMedic');
 
 		$("#medic").val(nombre);
+		$("#medic_id").val(abuelo.data('idMedic'));
 	});
 };
