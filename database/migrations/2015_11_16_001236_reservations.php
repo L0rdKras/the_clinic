@@ -17,7 +17,7 @@ class Reservations extends Migration
 
             $table->increments('id');
             $table->date('reservationDate');
-            $table->integer('room');
+            //$table->integer('room');
             $table->integer('patient_id')->unsigned();
             $table->integer('medic_id')->unsigned();
             $table->integer('atention_id')->unsigned();

@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Block;
+use App\Reservation;
+use App\ReservationInfo;
 
 class ShedulleController extends Controller
 {
@@ -96,6 +98,14 @@ class ShedulleController extends Controller
 
     public function dataSelection($room,$block,$year,$month,$day,$atention,$medic)
     {
-        return $room." ".$block." ".$year." ".$month." ".$day." ".$atention." ".$medic;
+        $date = $year."-".$month."-".$day;
+
+        $checkRoom = ReservationInfo::where('reservationDate','=',$date)->where('block_id','=',$block)->count();
+
+        if($checkRoom == 0){
+            //
+        }else{
+            //la sala esta ocupada en ese horario
+        }
     }
 }

@@ -15,6 +15,7 @@ class ReservationsInfo extends Migration
         Schema::create('reservationsInfo', function (Blueprint $table) {
             $table->increments('id');
             $table->date('reservationDate');
+            $table->integer('room')->unsigned();
             $table->integer('block_id')->unsigned();
             $table->integer('reservation_id')->unsigned();
             /*$table->integer('patient_id')->unsigned();
