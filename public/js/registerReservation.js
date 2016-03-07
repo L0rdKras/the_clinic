@@ -29,6 +29,7 @@ var clickHour = function(){
 		url = url.replace(":DATE",dia);
 		url = url.replace(":ATENTION",idAtention);
 		url = url.replace(":MEDIC",idMedic);
+		console.log(url);
 
 		$.get(url,function(response){
 			console.log(response);

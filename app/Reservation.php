@@ -7,6 +7,6 @@ class Reservation extends Model {
 	//
 	protected $table = 'reservations';
 
-	protected $fillable = ['reservationDate','room','patient_id','medic_id','atention_id','status'];
+	protected $fillable = ['reservationDate','patient_id','medic_id','atention_id','status'];
 
 }
