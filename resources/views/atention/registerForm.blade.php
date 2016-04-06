@@ -15,6 +15,12 @@
 					    {!! Form::text('name',null,array('id'=>'name','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
+				    <div class="row">
+	        			<h4>
+		        		{!! Form::label('price', 'Precio',array('class' => 'label label-default col-md-2')); !!}
+					    {!! Form::text('price',null,array('id'=>'price','class'=>'col-md-2 campoIngreso')); !!}
+					    </h4>
+				    </div>
 	        		<div class="row">
 	        			<h4>
 		        		{!! Form::label('block_numbers', 'Numero Bloques',array('class' => 'label label-default col-md-2')); !!}

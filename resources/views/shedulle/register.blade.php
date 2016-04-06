@@ -12,6 +12,7 @@
   				<input type="hidden" id="rutaListaAtenciones" value="{{route('lista-todas-atenciones')}}">
   				<input type="hidden" id="rutaListaProfecionales" value="{{route('lista-todos-profecionales')}}">
   				<input type="hidden" id="rutaDatosHoraSeleccionada" value="{{route('datos-hora-seleccionada')}}">
+
 	        	{!! Form::open(array('id'=>'formDummy','method'=>'POST')) !!}
 	        		<div class="row">
 	        			<h4>
@@ -37,8 +38,8 @@
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('room', 'Pabellon',array('class' => 'label label-default col-md-4')); !!}
-					    {!! Form::text('room',null,array('id'=>'room','class'=>'col-md-4 campoIngreso','readonly'=>'true')); !!}
+		        		{!! Form::label('roominfo', 'Pabellon',array('class' => 'label label-default col-md-4')); !!}
+					    {!! Form::text('roominfo',null,array('id'=>'roomInfo','class'=>'col-md-4 campoIngreso','readonly'=>'true')); !!}
 					    </h4>
 				    </div>
 				    <div class="row">
@@ -61,8 +62,8 @@
 				    </div>
 				    <div class="row">
 	        			<h4>
-		        		{!! Form::label('comment', 'Comentario',array('class' => 'label label-default col-md-4')); !!}
-					    {!! Form::textarea('comment',null,array('id'=>'comment','class'=>'col-md-4 campoIngreso','size'=>'10x3')); !!}
+		        		{!! Form::label('text_default', 'Comentario',array('class' => 'label label-default col-md-4')); !!}
+					    {!! Form::textarea('text_default',null,array('id'=>'text_default','class'=>'col-md-4 campoIngreso','size'=>'10x3')); !!}
 					    </h4>
 				    </div>
 				    
@@ -73,16 +74,20 @@
 				    </div>
 				{!! Form::close() !!}
 
-				{!! Form::open(array('id'=>'formReserv','method'=>'POST')) !!}
+				{!! Form::open(array('id'=>'formReserv','method'=>'POST','route'=>['save-reservation'])) !!}
 				{!! Form::hidden('reservationDate',null,array('id'=>'reservationDate')) !!}
 				{!! Form::hidden('room',null,array('id'=>'room')) !!}
 				{!! Form::hidden('patient_id',null,array('id'=>'patient_id')) !!}
 				{!! Form::hidden('medic_id',null,array('id'=>'medic_id')) !!}
 				{!! Form::hidden('atention_id',null,array('id'=>'atention_id')) !!}
 				{!! Form::hidden('block_id',null,array('id'=>'block_id')) !!}
+				{!! Form::hidden('comment',null,array('id'=>'comment')) !!}
 				{!! Form::close() !!}
 
 				{!! Form::open(array('route' => ['datos-hora-seleccionada',':ROOM',':BLOCK',':DATE',':ATENTION',':MEDIC'],'id'=>'formConsulta')) !!}
+				{!! Form::close() !!}
+
+				{!! Form::open(array('route' => ['info-day-room',':DATE',':ROOM'],'id'=>'formDataTable')) !!}
 				{!! Form::close() !!}
 			</div>
         </div>
@@ -100,7 +105,21 @@
   				</select>
   				<button id="btnCargaDia" class="btn btn-default">Carga</button>
   			</div>
-  			<div class="panel-body" id="muestraAgenda"></div>
+  			<div class="panel-body" id="muestraAgenda">
+  				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>Bloque</th>
+							<th>Paciente</th>
+							<th>Atencion</th>
+							<th>Info</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+  			</div>
         </div>
     </div>
 </div>

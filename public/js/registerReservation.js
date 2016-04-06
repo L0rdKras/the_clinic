@@ -11,6 +11,7 @@ $(document).ready(function() {
 
 	clickHour();
 
+	saveReservation();
 });
 
 var clickHour = function(){
@@ -32,7 +33,17 @@ var clickHour = function(){
 		console.log(url);
 
 		$.get(url,function(response){
-			console.log(response);
+			if(response.estado==='valido'){
+				$("#room").val(sala);
+				$("#roomInfo").val(sala);
+				$("#date").val(dia);
+				$("#reservationDate").val(dia);
+				$("#init_hour").val(response.inicio);
+				$("#finish_hour").val(response.fin);
+				$("#block_id").val(idbloque);
+			}else{
+				alert(response.mensaje);
+			}
 		});
 	});
 };
@@ -50,9 +61,21 @@ var cargaDia = function(){
 };
 
 var muestraInfoDia = function(dia,sala){
-	var tabla = $("#tablaDia").html();
+	//var tabla = $("#tablaDia").html();
 
-	$("#muestraAgenda").html(tabla);
+	//$("#muestraAgenda").html(tabla);
+
+	//buscar data
+	var form = $("#formDataTable");
+
+	var ruta = form.attr('action');
+
+	ruta = ruta.replace(':DATE',dia);
+	ruta = ruta.replace(':ROOM',sala);
+
+	$.get(ruta,function(response){
+		$("#muestraAgenda table tbody").html(response);
+	});
 };
 
 var showModalPatients = function(){
@@ -141,7 +164,9 @@ var selectPatient = function(){
 		var nombre = abuelo.data('firstnamePatient')+" "+abuelo.data("lastnamePatient");
 
 		$("#patient").val(nombre);
-		$("#patient_id").val(abuelo.data('idPAtient'));
+		$("#patient_id").val(abuelo.data('idPatient'));
+
+		$("#modal-confirmation").modal('hide');
 	});
 };
 
@@ -172,5 +197,28 @@ var selectMedic = function(){
 
 		$("#medic").val(nombre);
 		$("#medic_id").val(abuelo.data('idMedic'));
+	});
+};
+
+var saveReservation = function(){
+	$("#guardar").on('click',function(e){
+		e.preventDefault();
+
+		$("#comment").val($("#text_default").val());
+
+		var form = $("#formReserv");
+
+		var data = form.serialize();
+
+		var url = form.attr('action');
+
+		$.post(url,data,function(response){
+			//console.log(response);
+			if(response.respuesta=="Guardado"){
+				var dia = $("#fechaReserva").val();
+				var sala = $("#sala").val();
+				muestraInfoDia(dia,sala);
+			}
+		},'json');
 	});
 };

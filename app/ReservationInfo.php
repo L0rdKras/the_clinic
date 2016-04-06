@@ -9,4 +9,9 @@ class ReservationInfo extends Model {
 
 	protected $fillable = ['reservationDate','room','block_id','reservation_id'];
 
+	public function Reservation()
+	{
+		return $this->belongsTo('App\Reservation');
+	}
+
 }

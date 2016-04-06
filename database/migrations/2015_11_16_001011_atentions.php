@@ -15,6 +15,7 @@ class Atentions extends Migration
         Schema::create('atentions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',100);
+            $table->integer('price');
             $table->integer('block_numbers')->unsigned();
             $table->timestamps();
         });

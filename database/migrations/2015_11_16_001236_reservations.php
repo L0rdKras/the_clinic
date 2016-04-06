@@ -22,6 +22,8 @@ class Reservations extends Migration
             $table->integer('medic_id')->unsigned();
             $table->integer('atention_id')->unsigned();
             $table->string('status',30)->default('Reservada');
+            $table->text('comment');
+
             $table->timestamps();
 
             $table->foreign('patient_id')->references('id')->on('patients');
