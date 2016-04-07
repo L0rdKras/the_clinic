@@ -13,6 +13,7 @@
 		            <thead>
 		              <tr>
 		                <th>Nombre</th>
+		                <th>Precio</th>
 		                <th>Bloques</th>
 		                <th>Editar</th>
 		              </tr>
@@ -21,6 +22,7 @@
 		              @foreach($atentions as $atention)
 		              <tr data-id="{{$atention->id}}">
 		                <td>{{$atention->name}}</td>
+		                <td>{{$atention->price}}</td>
 		                <td>{{$atention->block_numbers}}</td>
 		                <td>
 		                	<a class="btn btn-info" href="#">Ver</a>

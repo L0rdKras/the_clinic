@@ -44,10 +44,11 @@ class AtentionController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->only(['name','block_numbers']);
+        $input = $request->only(['name','price','block_numbers']);
 
         $rules = [
                 'name'=>'required',
+                'price'=>'required|numeric',
                 'block_numbers'=>'required|numeric',
             ];
 

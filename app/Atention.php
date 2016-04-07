@@ -7,6 +7,6 @@ class Atention extends Model {
 	//
 	protected $table = 'atentions';
 
-	protected $fillable = ['name','block_numbers'];
+	protected $fillable = ['name','price','block_numbers'];
 
 }
