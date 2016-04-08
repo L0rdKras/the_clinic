@@ -17,6 +17,7 @@
         			<h4>
 	        		   <a href="#" id="btnSearchPatient" class="btn btn-primary">Buscar Paciente</a>
 				    </h4>
+				    <div id="patientArea"></div>
 			    </div>
 			</div>
         </div>
@@ -50,6 +51,9 @@
 			    </div>
 			</div>
         </div>
+		{!! Form::close() !!}
+
+		{!! Form::open(array('route' => ['patient-data',':ID'],'id'=>'formDataPatient')) !!}
 		{!! Form::close() !!}
     </div>
 </div>
@@ -122,6 +126,24 @@
 		</table>
 		
 	</div>
+</template>
+
+<template id="showDataPatient">
+	<div class="row">
+		<div class="col-md-4">
+			<h4><label class="label label-default">Nombre</label></h4>
+			<h3>:NOMBRE</h3>
+		</div>
+		<div class="col-md-4">
+			<h4><label class="label label-default">RUT</label></h4>
+			<h3>:RUT</h3>
+		</div>
+		<div class="col-md-4">
+			<h4><label class="label label-default">Empresa</label></h4>
+			<h3>:EMPRESA</h3>
+		</div>
+	</div>
+
 </template>
 @endsection
 

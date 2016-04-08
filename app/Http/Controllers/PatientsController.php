@@ -191,4 +191,25 @@ class PatientsController extends Controller
 
         return response()->json($patients);
     }
+
+    public function dataOfPatient($id){
+        if($patient = Patient::find($id)){
+
+            $array_response['firstname'] = $patient->firstname;
+            $array_response['lastname'] = $patient->lastname;
+            $array_response['rut'] = $patient->rut;
+
+            $array_response['companyName'] = $patient->Company->name;
+
+            $array_response['companyBenefit'] = $patient->Company->benefit;
+
+            $array_response['companyAmount'] = $patient->Company->amount;
+
+            return response()->json($array_response);
+        }
+
+        return response()->json([]);
+
+    }
+
 }

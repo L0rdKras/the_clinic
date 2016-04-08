@@ -95,8 +95,24 @@ var selectPatient = function(){
 
 		var nombre = abuelo.data('firstnamePatient')+" "+abuelo.data("lastnamePatient");
 
-		$("#patient").val(nombre);
-		$("#patient_id").val(abuelo.data('idPatient'));
+		var form = $("#formDataPatient");
+
+		var ruta = form.attr('action');
+
+		ruta = ruta.replace(":ID",abuelo.data('idPatient'));
+
+		var template = $("#showDataPatient").html();
+
+		//load data
+		$.getJSON(ruta,function(response){
+			template = template.replace(':NOMBRE',response.firstname+" "+response.lastname);
+			template = template.replace(':RUT',response.rut);
+			template = template.replace(':EMPRESA',response.companyName);
+
+			$("#patientArea").html("");
+			$("#patientArea").html(template);
+			$("#btnSearchPatient").fadeOut();
+		});
 
 		$("#modal-confirmation").modal('hide');
 	});
@@ -127,7 +143,8 @@ var selectMedic = function(){
 
 		var nombre = abuelo.data('nameMedic');
 
-		$("#medic").val(nombre);
-		$("#medic_id").val(abuelo.data('idMedic'));
+		//$("#medic").val(nombre);
+		//$("#medic_id").val(abuelo.data('idMedic'));
+		$("#modal-confirmation").modal('hide');
 	});
 };
