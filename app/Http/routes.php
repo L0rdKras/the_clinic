@@ -55,5 +55,8 @@ Route::get('agenda/registrar/hora', ['as'=>'registrar-hora','uses'=>'ShedulleCon
 Route::post('agenda/registrar/hora', ['as'=>'save-reservation','uses'=>'ShedulleController@store']);
 Route::get('agenda/valida/seleccion/{room}/{block}/{year}/{month}/{day}/{atention}/{medic}',['as'=>'datos-hora-seleccionada','uses'=>'ShedulleController@dataSelection']);
 Route::get('agenda/datos/tabla/{year}/{month}/{day}/{room}', ['as'=>'info-day-room','uses'=>'ShedulleController@dataOfDayInRoom']);
+//Presupuesto
+Route::get('presupuesto',['as'=>'presupuesto','uses'=>'BudgetController@index']);
+Route::get('presupuesto/elaborar',['as'=>'crear-presupuesto','uses'=>'BudgetController@create']);
 
 Route::get('/prueba',['as'=>'prueba','uses'=>'ShedulleController@prueba']);

@@ -17,13 +17,14 @@ class Budgets extends Migration
             $table->integer('total_atentions');
             $table->integer('discount');
             $table->integer('total');
-            $table->integer('pacient_id')->unsigned();
+            $table->string('status');
+            $table->integer('patient_id')->unsigned();
             $table->integer('company_id')->unsigned();
             $table->integer('medic_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('pacient_id')->references('id')->on('pacients');
+            $table->foreign('patient_id')->references('id')->on('patients');
             $table->foreign('company_id')->references('id')->on('companys');
             $table->foreign('medic_id')->references('id')->on('medics');
             $table->foreign('user_id')->references('id')->on('users');

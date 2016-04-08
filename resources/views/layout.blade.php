@@ -38,7 +38,7 @@
             <li><a href="{{route('atenciones')}}">Atenciones</a></li>
             <li><a href="{{route('profecionales')}}">Profecionales</a></li>
             <li><a href="{{route('agenda')}}">Agenda</a></li>
-            <li><a href="">Presupuesto</a></li>
+            <li><a href="{{route('presupuesto')}}">Presupuesto</a></li>
             <?php
             if (Auth::guest()){
               //
