@@ -48,7 +48,7 @@ var showModalAtentions = function(){
 			var filas = "";
 			$.each(response, function(i,item){
 				//console.log(response[i].firstname);
-				filas = filas+"<tr data-id-atention='"+response[i].id+"' data-name-atention='"+response[i].name+"' ><th>"+response[i].name+"</th><th><a class='btn btn-warning botonCargaAtencion'>Carga</a></th></tr>";
+				filas = filas+"<tr data-id-atention='"+response[i].id+"' data-price='"+response[i].price+"' data-name-atention='"+response[i].name+"' ><th>"+response[i].name+"</th><th><a class='btn btn-warning botonCargaAtencion'>Carga</a></th></tr>";
 			});
 
 			estructuraTabla=estructuraTabla.replace('<tr><td>:DATAATENCIONES</td></tr>',filas);
@@ -73,7 +73,7 @@ var showModalMedics = function(){
 			var filas = "";
 			$.each(response, function(i,item){
 				//console.log(response[i].firstname);
-				filas = filas+"<tr data-id-medic='"+response[i].id+"' data-name-medic='"+response[i].name+"' ><th>"+response[i].name+"</th><th>"+response[i].speciality+"</th><th><a class='btn btn-warning botonCargaProfecional'>Carga</a></th></tr>";
+				filas = filas+"<tr data-id-medic='"+response[i].id+"' data-name-medic='"+response[i].name+"' data-speciality-medic='"+response[i].speciality+"' ><th>"+response[i].name+"</th><th>"+response[i].speciality+"</th><th><a class='btn btn-warning botonCargaProfecional'>Carga</a></th></tr>";
 			});
 
 			estructuraTabla=estructuraTabla.replace('<tr><td>:DATAPROFECIONALES</td></tr>',filas);
@@ -128,8 +128,15 @@ var selectAtention = function(){
 
 		var nombre = abuelo.data('nameAtention');
 
-		$("#atention").val(nombre);
-		$("#atention_id").val(abuelo.data('idAtention'));
+		var template = $("#tFilaAtenciones").html();
+
+		template = template.replace(/:ID/gi,abuelo.data('idAtention'));
+		template = template.replace(/:NOMBRE/gi,abuelo.data('nameAtention'));
+		template = template.replace(":PRECIO",abuelo.data('price'));
+
+		$("#tableOfAtentions tbody").append(template);
+		//$("#atention").val(nombre);
+		//$("#atention_id").val(abuelo.data('idAtention'));
 	});
 };
 
@@ -143,8 +150,18 @@ var selectMedic = function(){
 
 		var nombre = abuelo.data('nameMedic');
 
+		var especialidad = abuelo.data('specialityMedic');
+
 		//$("#medic").val(nombre);
 		//$("#medic_id").val(abuelo.data('idMedic'));
+		var template = $("#showDataMedic").html();
+
+		template = template.replace(":NOMBRE",nombre);
+		template = template.replace(":ESPECIALIDAD",especialidad);
+
+		$("#medicArea").html("");
+		$("#medicArea").html(template);
+
 		$("#modal-confirmation").modal('hide');
 	});
 };

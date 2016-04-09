@@ -30,6 +30,7 @@
         			<h4>
 	        		   <a href="#" id="btnSearchMedic" class="btn btn-primary">Buscar Profecional</a>
 				    </h4>
+				    <div id="medicArea"></div>
 			    </div>		    
 			</div>
         </div>
@@ -43,6 +44,19 @@
         			<h4>
 	        		   <a href="#" id="btnSearchAtention" class="btn btn-primary">+ Atencion</a>
 				    </h4>
+			    </div>
+			    <div id="areaTablaAtenciones" style="max-height:200px; overflow:auto;">
+			    	<table class="table table-hover table-bordered" id="tableOfAtentions">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Atencion</th>
+								<th>Valor</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
 			    </div>		    
 			    <div class="row">
 			    	<h4>
@@ -144,6 +158,28 @@
 		</div>
 	</div>
 
+</template>
+
+<template id="showDataMedic">
+	<div class="row">
+		<div class="col-md-4">
+			<h4><label class="label label-default">Nombre</label></h4>
+			<h3>:NOMBRE</h3>
+		</div>
+		<div class="col-md-4">
+			<h4><label class="label label-default">Especialidad</label></h4>
+			<h3>:ESPECIALIDAD</h3>
+		</div>
+	</div>
+
+</template>
+<template id="tFilaAtenciones">
+	<tr class="" data-id=":ID" data-name=":NOMBRE">
+		<th>:ID</th>
+		<th>:NOMBRE</th>
+		<th><input type="text" value=":PRECIO"/></th>
+		<th><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></th>
+	</tr>
 </template>
 @endsection
 
