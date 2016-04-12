@@ -7,7 +7,7 @@
         <div class="panel panel-primary col-md-6">
             <div class="list-group">
             	<a href="{{route('registrar-hora')}}" class="list-group-item">Registrar Hora</a>
-            	<a href="" class="list-group-item">Ver Calendario</a>
+            	<a href="{{route('ver-calendario')}}" class="list-group-item">Ver Calendario</a>
             </div>
         </div>
     </div>

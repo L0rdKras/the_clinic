@@ -60,11 +60,16 @@
 			    </div>		    
 			    <div class="row">
 			    	<h4>
+			    		{!! Form::label('totalAccounts', 'Total',array('class' => 'label label-default col-md-4')); !!}
+					    {!! Form::text('totalAccounts',null,array('id'=>'totalAccounts','class'=>'col-md-4 campoIngreso','readonly'=>'true')); !!}
+			    	</h4>
+			    	<h4>
 			    		{!! Form::submit('Guardar',array('id'=>'guardar','class'=>'btn btn-success')); !!}
 			    	</h4>
 			    </div>
 			</div>
         </div>
+        {!! Form::hidden('patient_id',null,array('id'=>'patient_id')); !!}
 		{!! Form::close() !!}
 
 		{!! Form::open(array('route' => ['patient-data',':ID'],'id'=>'formDataPatient')) !!}
@@ -174,11 +179,11 @@
 
 </template>
 <template id="tFilaAtenciones">
-	<tr class="" data-id=":ID" data-name=":NOMBRE">
+	<tr class="atencionCargada" data-id=":ID" data-name=":NOMBRE">
 		<th>:ID</th>
 		<th>:NOMBRE</th>
 		<th><input type="text" value=":PRECIO"/></th>
-		<th><a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></th>
+		<th><a href="#" class="btn btn-danger delete-atention"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></th>
 	</tr>
 </template>
 @endsection

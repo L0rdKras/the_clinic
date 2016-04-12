@@ -13,6 +13,7 @@ use App\Block;
 use App\Atention;
 use App\Reservation;
 use App\ReservationInfo;
+use App\Medic;
 
 class ShedulleController extends Controller
 {
@@ -287,12 +288,94 @@ class ShedulleController extends Controller
                     <th>".$block->startBlock." a ".$block->finishBlock."</th>
                     <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                     <th>".$info->Reservation->Atention->name."</th>
-                    <th><a href='#' class='btn btn-info infoBloque'>+ Info</a></th>
+                    <th>
+                        <a href='#' class='btn btn-info infoBloque'>+ Info</a>
+                    </th>
                 </tr>";
             }else{
                 $filas.="
                 <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='0' class='filaAgenda'>
                     <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>";
+            }
+        }
+
+        return $filas;
+    }
+
+    public function showCalendar(){
+        $medics = Medic::orderBy('name')->get();
+
+        return view("shedulle.dayOfCalendar",compact('medics'));
+    }
+
+    public function dataOfDayInRoom2($year,$month,$day,$room,$medic){
+        //$data = ReservationInfo::where('reservationDate',$date)->get();
+        $date = $year."-".$month."-".$day;
+        $blocks = Block::all();
+
+        $data = ReservationInfo::where('reservationDate',$date)->where('room',$room)->get();
+
+        $filas ="";
+
+        foreach ($blocks as $block) {
+            if(!$data->where('block_id',$block->id)->isEmpty()){
+                $info = $data->where('block_id',$block->id)->first();
+
+                if($medic != 0){
+                    //
+                    if($info->Reservation->Medic->id == $medic){
+                        //
+                        $filas.="
+                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' class='filaAgenda'>
+                            <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                            <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
+                            <th>".$info->Reservation->Atention->name."</th>
+                            <th>".$info->Reservation->Medic->name."</th>
+                            <th>".$info->Reservation->status."</th>
+                            <th>
+                                <a href='#' class='btn btn-info infoBloque'>+ Info</a>
+                                <a href='#' class='btn btn-warning editBloque'>Editar</a>
+                                <a href='#' class='btn btn-danger deleteBloque'>Borrar</a>
+                            </th>
+                        </tr>";
+                    }else{
+                        $filas.="
+                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='0' class='filaAgenda'>
+                            <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>";
+                    }
+                }else{
+
+                    $filas.="
+                    <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' class='filaAgenda'>
+                        <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                        <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
+                        <th>".$info->Reservation->Atention->name."</th>
+                        <th>".$info->Reservation->Medic->name."</th>
+                        <th>".$info->Reservation->status."</th>
+                        <th>
+                            <a href='#' class='btn btn-info infoBloque'>+ Info</a>
+                            <a href='#' class='btn btn-warning editBloque'>Editar</a>
+                            <a href='#' class='btn btn-danger deleteBloque'>Borrar</a>
+                        </th>
+                    </tr>";
+                }
+
+            }else{
+                $filas.="
+                <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='0' class='filaAgenda'>
+                    <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                    <th></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>

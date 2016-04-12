@@ -8,6 +8,10 @@ $(document).ready(function() {
 	selectAtention();
 	selectMedic();
 
+	cambioValor();
+
+	eliminarDelListado();
+
 });
 
 var showModalPatients = function(){
@@ -112,12 +116,25 @@ var selectPatient = function(){
 			$("#patientArea").html("");
 			$("#patientArea").html(template);
 			$("#btnSearchPatient").fadeOut();
+			$("#patient_id").val(abuelo.data('idPatient'));
 		});
 
 		$("#modal-confirmation").modal('hide');
 	});
 };
 
+var revisarListaAtenciones = function(id){
+	var check = true;
+	//$("#tableOfAtentions tbody .atencionCargada th input").each(function(index){
+	$("#tableOfAtentions tbody .atencionCargada").each(function(index){
+		//console.log($(this).val());
+		if(id === $(this).data('id')){
+			check = false;
+		}
+	});
+
+	return check;
+};
 var selectAtention = function(){
 	$("body").on('click',"#modal-confirmation #tablaElejirAtenciones tbody tr th .botonCargaAtencion",function(e){
 		e.preventDefault();
@@ -134,7 +151,17 @@ var selectAtention = function(){
 		template = template.replace(/:NOMBRE/gi,abuelo.data('nameAtention'));
 		template = template.replace(":PRECIO",abuelo.data('price'));
 
-		$("#tableOfAtentions tbody").append(template);
+		$.when(revisarListaAtenciones(abuelo.data('idAtention'))).promise().done(function(message){
+			if(message){
+				$("#tableOfAtentions tbody").append(template).promise().done(function(){
+					//calcular Total
+					calcularTotal();
+				});
+			}else{
+				alert("Esta atencion ya se encuentra en el listado");
+			}
+		});
+
 		//$("#atention").val(nombre);
 		//$("#atention_id").val(abuelo.data('idAtention'));
 	});
@@ -163,5 +190,35 @@ var selectMedic = function(){
 		$("#medicArea").html(template);
 
 		$("#modal-confirmation").modal('hide');
+	});
+};
+
+var calcularTotal = function(){
+	var total = 0;
+	$("#tableOfAtentions tbody .atencionCargada th input").each(function(index){
+		total += parseInt($(this).val());
+	});
+
+	var id = $("#patient_id").val();
+
+	$("#totalAccounts").val(total);
+};
+
+var cambioValor = function(){
+	$("#tableOfAtentions tbody").on("keyup",".atencionCargada th input",function(){
+		calcularTotal();
+	});
+};
+
+var eliminarDelListado =  function(){
+	$("#tableOfAtentions tbody").on("click",".atencionCargada th .delete-atention", function(event){
+		event.preventDefault();
+		var padre = $(this).parent();
+		var abuelo = $(padre).parent();
+
+		$(abuelo).fadeOut("slow",function(){
+			$(abuelo).remove();
+			calcularTotal();
+		});
 	});
 };

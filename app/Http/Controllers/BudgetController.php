@@ -97,4 +97,16 @@ class BudgetController extends Controller
     {
         //
     }
+
+    public function calculate($id,$total){
+        $patient = Patient::find($id);
+
+        $benefit = $patient->Company->benefit;
+
+        $discount = round($total*$benefit/100);
+
+        $totalToPay = $total-$discount;
+
+        return response()->json(compact('discount','totalToPay'));
+    }
 }
