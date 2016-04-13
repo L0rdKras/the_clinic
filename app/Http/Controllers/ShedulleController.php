@@ -330,7 +330,7 @@ class ShedulleController extends Controller
                     if($info->Reservation->Medic->id == $medic){
                         //
                         $filas.="
-                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' class='filaAgenda'>
+                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda'>
                             <th>".$block->startBlock." a ".$block->finishBlock."</th>
                             <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                             <th>".$info->Reservation->Atention->name."</th>
@@ -356,7 +356,7 @@ class ShedulleController extends Controller
                 }else{
 
                     $filas.="
-                    <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' class='filaAgenda'>
+                    <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda'>
                         <th>".$block->startBlock." a ".$block->finishBlock."</th>
                         <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                         <th>".$info->Reservation->Atention->name."</th>

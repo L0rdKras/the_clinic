@@ -14,4 +14,9 @@ class ReservationInfo extends Model {
 		return $this->belongsTo('App\Reservation');
 	}
 
+	public function Block()
+	{
+		return $this->belongsTo('App\Block');
+	}
+
 }

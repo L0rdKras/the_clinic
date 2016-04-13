@@ -3,6 +3,10 @@ $(document).ready(function() {
 
 	//clickHour();
 
+	showInfo();
+
+	changeStatus();
+
 });
 
 var clickHour = function(){
@@ -79,6 +83,40 @@ var showInfo = function(){
 
 		var padre = $(this).parent();
 		var abuelo = $(padre).parent();
+
+		idReservation = abuelo.data('reservationId');
+
+		var form = $("#formDataReservation");
+
+		var ruta = form.attr('action');
+
+		ruta = ruta.replace(':ID',idReservation);
+
+		var modalview = $("#modalTemplate").html();
+
+		var modalInfo = $("#datosReserva").html();
+
+		$.getJSON(ruta,function(response){
+			modalInfo = modalInfo.replace(":PACIENTE",response.patient);
+
+			modalInfo = modalInfo.replace(":MEDIC",response.medic);
+
+			modalInfo = modalInfo.replace(":ATENCION",response.atention);
+
+			modalInfo = modalInfo.replace(":DATE",response.date);
+
+			modalInfo = modalInfo.replace(":HORARIO",response.start+" a "+response.finish);
+
+			modalInfo = modalInfo.replace(":PABELLON",response.room);
+
+			modalInfo = modalInfo.replace(":STATUS",response.status);
+
+			modalInfo = modalInfo.replace(":COMMENT",response.comment);
+
+			modalview = modalview.replace(":MENSAJE",modalInfo);
+
+			$(modalview).modal();
+		});
 	});
 }
 
@@ -102,5 +140,36 @@ var saveReservation = function(){
 				muestraInfoDia(dia,sala);
 			}
 		},'json');
+	});
+};
+
+var changeStatus = function(){
+	$("#data-table tbody").on("click",".filaAgenda th .editBloque",function(event){
+		event.preventDefault();
+
+		var padre = $(this).parent();
+		var abuelo = $(padre).parent();
+
+		idReservation = abuelo.data('reservationId');
+
+		statusReservation = abuelo.data('reservationStatus');
+
+		/*var form = $("#formDataReservation");
+
+		var ruta = form.attr('action');
+
+		ruta = ruta.replace(':ID',idReservation);*/
+
+		var modalview = $("#modalTemplate").html();
+
+		var modalInfo = $("#cambiarEstado").html();
+
+		modalInfo = modalInfo.replace(':ID',idReservation);
+
+		modalview = modalview.replace(":MENSAJE",modalInfo);
+
+		$(modalview).modal();
+
+		$("#newStatus").val(statusReservation);
 	});
 };
