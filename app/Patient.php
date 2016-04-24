@@ -45,4 +45,13 @@ class Patient extends Model {
 		return 0;
 	}
 
+	public function discount($amount){
+		$company = $this->Company;
+
+		//revisar cuanto lleva gastado ya de la
+		//cobertura
+
+		return round(($amount*$company->benefit)/100);
+	}
+
 }

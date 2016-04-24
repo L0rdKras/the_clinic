@@ -20,7 +20,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        echo "home";
+        $apiUrl = 'http://mindicador.cl/api';
+
+        $json = file_get_contents($apiUrl);
+
+        $dailyIndicators = json_decode($json);
+
+        return view('home',compact('dailyIndicators'));
     }
 
 }

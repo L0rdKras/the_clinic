@@ -33,12 +33,16 @@
             .title {
                 font-size: 96px;
             }
+            .title a{
+                text-decoration: none;
+                color: black;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Clinica Dental</div>
+                <div class="title"><a href="{{route('home')}}">Clinica Dental</a></div>
             </div>
         </div>
     </body>

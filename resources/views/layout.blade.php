@@ -32,7 +32,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/">Inicio</a></li>
+            <li><a href="{{route('home')}}">Inicio</a></li>
             <li><a href="{{route('pacientes')}}">Pacientes</a></li>
             <li><a href="{{route('empresas')}}">Empresas</a></li>
             <li><a href="{{route('atenciones')}}">Atenciones</a></li>

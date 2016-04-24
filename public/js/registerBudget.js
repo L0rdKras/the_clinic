@@ -12,6 +12,8 @@ $(document).ready(function() {
 
 	eliminarDelListado();
 
+	//guardarPresupuesto();
+
 });
 
 var showModalPatients = function(){
@@ -180,7 +182,7 @@ var selectMedic = function(){
 		var especialidad = abuelo.data('specialityMedic');
 
 		//$("#medic").val(nombre);
-		//$("#medic_id").val(abuelo.data('idMedic'));
+		$("#medic_id").val(abuelo.data('idMedic'));
 		var template = $("#showDataMedic").html();
 
 		template = template.replace(":NOMBRE",nombre);
@@ -201,7 +203,7 @@ var calcularTotal = function(){
 
 	var id = $("#patient_id").val();
 
-	$("#totalAccounts").val(total);
+	$("#total_atentions").val(total);
 };
 
 var cambioValor = function(){
@@ -220,5 +222,35 @@ var eliminarDelListado =  function(){
 			$(abuelo).remove();
 			calcularTotal();
 		});
+	});
+};
+
+var guardarPresupuesto = function(){
+	$("#guardar").on("click",function(e){
+		e.preventDefault();
+		var arreglo = [];
+		$("#tableOfAtentions tbody .atencionCargada th input").each(function(index){
+			//total += parseInt($(this).val());
+			var padre = $(this).parent();
+			var abuelo = $(padre).parent();
+
+			idAtention = abuelo.data("id");
+			arreglo.push({valor:parseInt($(this).val()),id:idAtention});
+		});
+
+		detail = JSON.stringify(arreglo);
+
+		$("#detail").val(detail);
+
+		var form = $("#formDummy");
+
+		var data = form.serialize();
+
+		var url = form.attr('action');
+
+		$.post(url,data,function(response){
+			console.log(response);
+		});
+
 	});
 };

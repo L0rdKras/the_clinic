@@ -4,7 +4,7 @@
 <div class="container theme-showcase" style="padding-top:80px" role="main">
 	<h2>Presupuesto</h2>
     <div class="page-hader">
-	    {!! Form::open(array('id'=>'formDummy','method'=>'POST')) !!}
+	    {!! Form::open(array('route'=>['save-budget'],'id'=>'formDummy','method'=>'POST')) !!}
 		<input type="hidden" id="rutaListaPacientes" value="{{route('lista-todos-pacientes')}}">
 		<input type="hidden" id="rutaListaAtenciones" value="{{route('lista-todas-atenciones')}}">
 		<input type="hidden" id="rutaListaProfecionales" value="{{route('lista-todos-profecionales')}}">
@@ -58,18 +58,20 @@
 						<tbody></tbody>
 					</table>
 			    </div>		    
-			    <div class="row">
-			    	<h4>
-			    		{!! Form::label('totalAccounts', 'Total',array('class' => 'label label-default col-md-4')); !!}
-					    {!! Form::text('totalAccounts',null,array('id'=>'totalAccounts','class'=>'col-md-4 campoIngreso','readonly'=>'true')); !!}
+			    <div>
+			    	<h4 class="row">
+			    		{!! Form::label('total_atentions', 'Total',array('class' => 'label label-default col-md-4')); !!}
+					    {!! Form::text('total_atentions',null,array('id'=>'total_atentions','class'=>'col-md-4 campoIngreso','readonly'=>'true')); !!}
 			    	</h4>
-			    	<h4>
+			    	<h4 class="row">
 			    		{!! Form::submit('Guardar',array('id'=>'guardar','class'=>'btn btn-success')); !!}
 			    	</h4>
 			    </div>
 			</div>
         </div>
         {!! Form::hidden('patient_id',null,array('id'=>'patient_id')); !!}
+        {!! Form::hidden('medic_id',null,array('id'=>'medic_id')); !!}
+        {!! Form::hidden('detail',null,array('id'=>'detail')); !!}
 		{!! Form::close() !!}
 
 		{!! Form::open(array('route' => ['patient-data',':ID'],'id'=>'formDataPatient')) !!}

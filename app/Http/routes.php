@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('/home', ['as'=>'home','uses'=>'HomeController@index']);
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -63,5 +63,6 @@ Route::patch('reservation/update/status/{id}',['as'=>'cambia-estado','uses'=>'Re
 //Presupuesto
 Route::get('presupuesto',['as'=>'presupuesto','uses'=>'BudgetController@index']);
 Route::get('presupuesto/elaborar',['as'=>'crear-presupuesto','uses'=>'BudgetController@create']);
+Route::post('presupuesto/save',['as'=>'save-budget','uses'=>'BudgetController@store']);
 
 Route::get('/prueba',['as'=>'prueba','uses'=>'ShedulleController@prueba']);
