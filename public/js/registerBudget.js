@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 	eliminarDelListado();
 
-	//guardarPresupuesto();
+	guardarPresupuesto();
 
 });
 
@@ -249,8 +249,48 @@ var guardarPresupuesto = function(){
 		var url = form.attr('action');
 
 		$.post(url,data,function(response){
-			console.log(response);
+			//borrar los alert
+			cleanAlerts("formDummy");
+			if(response.respuesta!=undefined){
+				var modalWindow = $('#modalTemplate').html();
+				if(response.respuesta==="Guardado"){
+					//informar y recargar
+					modalWindow = modalWindow.replace(':MENSAJE','Presupuesto Guardado');
+					$(modalWindow).modal({
+					  keyboard: false,
+					  backdrop: 'static'
+					});
+					//setTimeout(location.reload(), 5000);
+				}else{
+					//informar error
+					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
+					$(modalWindow).modal();
+				}
+			}else{
+				$("#formDummy .campoIngreso").each(function (index) 
+        		{
+        			var id_name = this.id;
+
+        			showError(id_name,response);
+
+        			alert("Falta informacion");
+        			
+        		});
+			}
+		},'json').fail(function(){
+			alert("Ocurrio un error al intentar guardar la informacion");
 		});
 
 	});
+};
+
+var cleanAlerts = function(object){
+	$("#"+object+" .alert").remove();
+};
+
+var showError = function(fieldName,response){
+	if(response[fieldName]!=undefined){
+		//console.log(response[fieldName][0]);
+		$("#"+fieldName).after('<div class="label alert alert-danger" role="alert">'+response[fieldName][0]+'</div>');
+	}
 };

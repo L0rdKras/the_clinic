@@ -11,6 +11,7 @@ use App\Atention;
 use App\Medic;
 use App\Patient;
 use App\Budget;
+use App\BudgetDetail;
 
 class BudgetController extends Controller
 {
@@ -55,8 +56,6 @@ class BudgetController extends Controller
 
         $detail = $info['detail'];
 
-        $json = json_decode($detail);
-
         $input = $request->only(['patient_id','medic_id','total_atentions']);
 
         $patient = Patient::find($input['patient_id']);
@@ -71,11 +70,49 @@ class BudgetController extends Controller
         $input['status'] = "Pendiente";
         $input['user_id'] = $request->user()->id;
 
-        $budget = new Budget($input);
+        $rules = [
+        'patient_id'=>'required',
+        'medic_id'=>'required',
+        'total_atentions'=>'required'
+        ];
 
-        $budget->save();
+        $validation = \Validator::make($input,$rules);
 
-        dd($budget);
+        if($validation->passes())
+        {
+            //
+            $budget = new Budget($input);
+
+            $budget->save();
+
+            $json = json_decode($detail);
+
+            //return $json;
+
+            foreach ($json as $key => $value) {
+                $data_detail = [
+                    "price"=>$value->valor,
+                    "budget_id"=>$budget->id,
+                    "atention_id"=>$value->id
+                ];
+                //return $value->valor;
+
+                $budgetDetail = new BudgetDetail($data_detail);
+
+                $budgetDetail->save();
+            }
+
+            $respuesta = "Guardado";
+
+            $numero = $budget->id;
+
+            return response()->json(compact('respuesta','numero'));
+        }
+
+        $messages = $validation->errors();
+
+        return response()->json($messages);
+
     }
 
     /**
