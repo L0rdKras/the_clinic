@@ -64,5 +64,11 @@ Route::patch('reservation/update/status/{id}',['as'=>'cambia-estado','uses'=>'Re
 Route::get('presupuesto',['as'=>'presupuesto','uses'=>'BudgetController@index']);
 Route::get('presupuesto/elaborar',['as'=>'crear-presupuesto','uses'=>'BudgetController@create']);
 Route::post('presupuesto/save',['as'=>'save-budget','uses'=>'BudgetController@store']);
+Route::get('presupuesto/imprimir/{id}',['as'=>'print-budget','uses'=>'BudgetController@printBudget']);
+Route::get('presupuesto/lista',['as'=>'budget-list','uses'=>'BudgetController@listOfBudgets']);
+Route::get('ver/presupuesto/{id}',['as'=>'show-budget','uses'=>'BudgetController@show']);
+
+Route::post('confirm/budget/{id}',['as'=>'confirm-budget','uses'=>'BudgetController@confirmBudget']);
+Route::post('cancel/budget/{id}',['as'=>'cancel-budget','uses'=>'BudgetController@cancelBudget']);
 
 Route::get('/prueba',['as'=>'prueba','uses'=>'ShedulleController@prueba']);

@@ -8,6 +8,7 @@
 		<input type="hidden" id="rutaListaPacientes" value="{{route('lista-todos-pacientes')}}">
 		<input type="hidden" id="rutaListaAtenciones" value="{{route('lista-todas-atenciones')}}">
 		<input type="hidden" id="rutaListaProfecionales" value="{{route('lista-todos-profecionales')}}">
+		<input type="hidden" id="rutaImpresion" value="{{route('print-budget',':ID')}}">
         <div class="panel panel-default">
 
   			<div class="panel-heading">Paciente</div>

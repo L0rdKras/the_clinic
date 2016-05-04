@@ -7,7 +7,7 @@
         <div class="panel panel-primary col-md-6">
             <div class="list-group">
             	<a href="{{route('crear-presupuesto')}}" class="list-group-item">Elaborar Presupuesto</a>
-            	<a href="" class="list-group-item">Ver Lista</a>
+            	<a href="{{route('budget-list')}}" class="list-group-item">Ver Lista</a>
             </div>
         </div>
     </div>

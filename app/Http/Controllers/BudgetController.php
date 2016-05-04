@@ -12,6 +12,7 @@ use App\Medic;
 use App\Patient;
 use App\Budget;
 use App\BudgetDetail;
+use App\Debt;
 
 class BudgetController extends Controller
 {
@@ -123,7 +124,9 @@ class BudgetController extends Controller
      */
     public function show($id)
     {
-        //
+        $budget = Budget::find($id);
+
+        return view('budget.show',compact('budget'));
     }
 
     /**
@@ -160,6 +163,12 @@ class BudgetController extends Controller
         //
     }
 
+    public function listOfBudgets(){
+        $budgets = Budget::orderBy('id','desc')->paginate(15);
+
+        return view('budget.list',compact('budgets'));
+    }
+
     public function calculate($id,$total){
         $patient = Patient::find($id);
 
@@ -170,5 +179,50 @@ class BudgetController extends Controller
         $totalToPay = $total-$discount;
 
         return response()->json(compact('discount','totalToPay'));
+    }
+
+    public function printBudget($id){
+        /*$pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML(view('budget.index'));*/
+        //$sale = Sale::find($id);
+        $view =  \View::make('printTest')->render();
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream();
+    }
+
+    public function confirmBudget($id){
+        $budget = Budget::find($id);
+
+        $budget->status = "Confirmado";
+
+        $budget->save();
+
+        $today = date("Y-m-d");
+
+        $dataDebt = [
+        'total'         => $budget->total,
+        'patient_id'    => $budget->Patient->id,
+        'budget_id'     => $budget->id,
+        'date'          => $today
+        ];
+
+        $debt = new Debt($dataDebt);
+
+        $debt->save();
+
+        return "Actualizado";
+    }
+
+    public function cancelBudget($id){
+        $budget = Budget::find($id);
+
+        $budget->status = "Nulo";
+
+        $budget->save();
+
+        return "Actualizado";
     }
 }

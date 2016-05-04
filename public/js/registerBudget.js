@@ -260,7 +260,10 @@ var guardarPresupuesto = function(){
 					  keyboard: false,
 					  backdrop: 'static'
 					});
-					//setTimeout(location.reload(), 5000);
+					setTimeout(location.reload(), 5000);
+					rutaImpresion = $("#rutaImpresion").val();
+					rutaImpresion = rutaImpresion.replace(':ID',response.numero);
+					window.open(rutaImpresion);
 				}else{
 					//informar error
 					modalWindow = modalWindow.replace(':MENSAJE',response.respuesta);
