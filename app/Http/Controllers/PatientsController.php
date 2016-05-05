@@ -136,7 +136,17 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $patient = Patient::find($id);
+
+        $dataToSave = $patient->company_id;
+
+        if($patient->type==="Carga"){
+            $relation = Relationship::where('burden',$id)->first();
+
+            $dataToSave = $relation->incumbent;
+        }
+
+        return view('patients.edit',compact('patient','dataToSave'));
     }
 
     /**

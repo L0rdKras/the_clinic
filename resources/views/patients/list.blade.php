@@ -16,7 +16,7 @@
 		                <th>Nombre</th>
 		                <th>Telefono</th>
 		                <th>Tipo</th>
-		                <th>Info</th>
+		                <th></th>
 		              </tr>
 		            </thead>
 		            <tbody>
@@ -28,6 +28,7 @@
 		                <td>{{$patient->type}}</td>
 		                <td>
 		                	<a class="btn btn-info" href="#">Ver</a>
+		                	<a class="btn btn-success" href="{{route('patient-edit',$patient->id)}}">Editar</a>
 		                </td>
 		              </tr>
 		              @endforeach
