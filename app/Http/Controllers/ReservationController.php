@@ -125,5 +125,8 @@ class ReservationController extends Controller
     public function updateStatus(Request $request, $id)
     {
         //
+        $respuesta = $request->only(['newStatus','commit']);
+
+        return $respuesta;
     }
 }

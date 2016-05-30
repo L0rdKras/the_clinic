@@ -10,13 +10,13 @@
   				<input type='hidden' name='formato_fecha' id="formato_fecha" value='yyyy/mm/dd'/>
   				Fecha: <input type="text" id="fechaReserva" name="fecha" readonly size="10"/>
   				<button type='button' onclick='displayCalendar(document.getElementById("fechaReserva"),document.getElementById("formato_fecha").value,this)'><span class="glyphicon glyphicon-search"></span></button>
-  				Pabellon: 
+  				Pabellon:
   				<select name="sala" id="sala">
   					<option value=""></option>
   					<option value="1">1</option>
   					<option value="2">2</option>
   				</select>
-  				Medico: 
+  				Medico:
   				<select name="medic" id="medic">
   					<option value="0"></option>
   					@foreach($medics as $medic)
@@ -38,7 +38,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+
 					</tbody>
 				</table>
   			</div>
@@ -51,6 +51,11 @@
 
 {!! Form::open(array('route' => ['all-data-reservation',':ID'],'id'=>'formDataReservation')) !!}
 {!! Form::close() !!}
+
+{!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formChangeStatus','method'=>'PATCH')) !!}
+{!! Form::hidden('idCambiar',null,array('id'=>'idCambiar'))!!}
+{!! Form::close() !!}
+
 <template id="modalTemplate">
 	<div class="modal fade bs-example-modal-lg" id="modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg">
@@ -62,7 +67,7 @@
 	      <div class="modal-body">
 	        <p>:MENSAJE</p>
 	      </div>
-	      
+
 	    </div>
 	  </div>
 	</div>
@@ -103,17 +108,25 @@
 <template id="cambiarEstado">
 	<div class="panel panel-default">
 	  <h2>Cambiar Estado</h2>
-	  <div class="panel-body row">
-	  	{!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formChangeStatus')) !!}
-	  	<h4>
+	  <div class="panel-body">
+	  	{!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formDummyChangeStatus','method'=>'PATCH')) !!}
+	  	<h4 class="row">
 	  		{!! Form::label('newStatus', 'Estado',array('class' => 'label label-default col-md-4')); !!}
 	  		<select name="newStatus" id="newStatus" class="col-md-4">
 	  			<option value="Reservada">Reservada</option>
 	  			<option value="Confirmada">Confirmada</option>
 	  			<option value="Cancelada">Cancelada</option>
+					<option value="Atencion realizada">Atencion realizada</option>
+					<option value="Inasistencia">Inasistencia</option>
 	  		</select>
-	  		<a href="#" id="btnChangeStatus" class="btn btn-primary col-md-3">Actualizar</a>
 	  	</h4>
+			<h4 class="row">
+				{!! Form::label('commit', 'Comentario',array('class' => 'label label-default col-md-4')); !!}
+				{!! Form::textarea('commit', null, ['size' => '30x5','id'=>'commit']) !!}
+			</h4>
+			<h4 class="row">
+				<a href="#" id="btnChangeStatus" class="btn btn-primary col-md-3">Actualizar</a>
+			</h4>
 		{!! Form::close() !!}
 	  </div>
 </template>

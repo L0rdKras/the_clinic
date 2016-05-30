@@ -7,6 +7,8 @@ $(document).ready(function() {
 
 	changeStatus();
 
+	updateStatus();
+
 });
 
 var clickHour = function(){
@@ -50,7 +52,7 @@ var cargaDia = function(){
 		var sala = $("#sala").val();
 		var medic = $("#medic").val();
 
-		if(dia != "" && sala != ""){
+		if(dia !== "" && sala !== ""){
 			muestraInfoDia(dia,sala,medic);
 		}
 	});
@@ -118,7 +120,7 @@ var showInfo = function(){
 			$(modalview).modal();
 		});
 	});
-}
+};
 
 var saveReservation = function(){
 	$("#guardar").on('click',function(e){
@@ -154,6 +156,8 @@ var changeStatus = function(){
 
 		statusReservation = abuelo.data('reservationStatus');
 
+		$("#idCambiar").val(idReservation);
+
 		/*var form = $("#formDataReservation");
 
 		var ruta = form.attr('action');
@@ -164,12 +168,36 @@ var changeStatus = function(){
 
 		var modalInfo = $("#cambiarEstado").html();
 
-		modalInfo = modalInfo.replace(':ID',idReservation);
+		//modalInfo = modalInfo.replace(':ID',idReservation);
 
 		modalview = modalview.replace(":MENSAJE",modalInfo);
 
 		$(modalview).modal();
 
 		$("#newStatus").val(statusReservation);
+	});
+};
+
+var updateStatus = function(){
+	$("body").on('click',"#btnChangeStatus",function(event){
+		event.preventDefault();
+
+		var form = $("#formChangeStatus");
+
+		var ruta = form.attr('action');
+
+		var id = $("#idCambiar").val();
+
+		ruta = ruta.replace(':ID',id);
+
+		var formDummy = $("#formDummyChangeStatus");
+
+		var data = formDummy.serialize();
+
+		//console.log(ruta);
+		$.post(ruta,data,function(response){
+			console.log(response);
+		});
+
 	});
 };
