@@ -25,7 +25,8 @@
 		                <td>{{$company->name}}</td>
 		                <td>{{$company->phone}}</td>
 		                <td>
-		                	<a class="btn btn-info" href="#">Ver</a>
+		                	<a class="btn btn-info" href="#">+ Info</a>
+											<a href="{{route('company-edit',$company->id)}}" class="btn btn-primary edit-company">Editar</a>
 		                </td>
 		              </tr>
 		              @endforeach
@@ -47,7 +48,7 @@
 	      <div class="modal-body">
 	        <p>:MENSAJE</p>
 	      </div>
-	      
+
 	    </div>
 	  </div>
 	</div>

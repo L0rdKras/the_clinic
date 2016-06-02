@@ -39,6 +39,8 @@ Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);
 Route::post('empresas/registrar', ['as'=>'guarda-empresa','uses'=>'CompanyController@store']);
 Route::get('empresas/listado', ['as'=>'lista-empresas','uses'=>'CompanyController@companys_list']);
+Route::get('empresas/editar/datos/{id}',['as'=>'company-edit','uses'=>'CompanyController@edit']);
+Route::patch('empresa/update/{id}',['as'=>'company-update','uses'=>'CompanyController@update']);
 //Atenciones
 Route::get('atenciones', ['as'=>'atenciones','uses'=>'AtentionController@index']);
 Route::get('atenciones/registrar', ['as'=>'crear-atencion','uses'=>'AtentionController@create']);
