@@ -15,9 +15,9 @@ class Companys extends Migration
         Schema::create('companys', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',100);
-            $table->string('rut',100)->unique();
+            $table->string('rut',100);
             $table->string('phone',20);
-            $table->string('email',50)->unique();
+            $table->string('email',100);
             $table->integer('benefit');
             $table->integer('amount');
             $table->integer('month');

@@ -73,3 +73,5 @@ Route::post('confirm/budget/{id}',['as'=>'confirm-budget','uses'=>'BudgetControl
 Route::post('cancel/budget/{id}',['as'=>'cancel-budget','uses'=>'BudgetController@cancelBudget']);
 
 Route::get('/prueba',['as'=>'prueba','uses'=>'ShedulleController@prueba']);
+
+Route::get('/import/companies',['as'=>'import-companies','uses'=>'importDataController@companies']);

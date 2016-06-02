@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'dummy' => [
+            'driver'    => 'mysql',
+            'host'      => env('DUMMY_HOST', 'localhost'),
+            'database'  => env('DUMMY_DATABASE', 'forge'),
+            'username'  => env('DUMMY_USERNAME', 'forge'),
+            'password'  => env('DUMMY_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
