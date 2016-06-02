@@ -1,6 +1,44 @@
 @extends('layout')
 
 @section('content')
+<div class="modal fade bs-example-modal-lg" id="modal-for-update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Sistema Clinica</h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel panel-default">
+					<h2>Cambiar Estado</h2>
+					<div class="panel-body">
+						{!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formDummyChangeStatus','method'=>'PATCH')) !!}
+						<h4 class="row">
+							{!! Form::label('newStatus', 'Estado',array('class' => 'label label-default col-md-4')); !!}
+							<select name="newStatus" id="newStatus" class="col-md-4">
+								<option value="Reservada">Reservada</option>
+								<option value="Confirmada">Confirmada</option>
+								<option value="Cancelada">Cancelada</option>
+								<option value="Realizada">Atencion realizada</option>
+								<option value="Inasistencia">Inasistencia</option>
+							</select>
+						</h4>
+						<h4 class="row">
+							{!! Form::label('commit', 'Comentario',array('class' => 'label label-default col-md-4')); !!}
+							{!! Form::textarea('commit', null, ['size' => '30x5','id'=>'commit']) !!}
+						</h4>
+						<h4 class="row">
+							<a href="#" id="btnChangeStatus" class="btn btn-primary col-md-3">Actualizar</a>
+						</h4>
+					{!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="container theme-showcase" style="padding-top:80px" role="main">
 	<h2>Revisar Dias</h2>
     <div class="page-hader">
@@ -105,31 +143,6 @@
 	</div>
 </template>
 
-<template id="cambiarEstado">
-	<div class="panel panel-default">
-	  <h2>Cambiar Estado</h2>
-	  <div class="panel-body">
-	  	{!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formDummyChangeStatus','method'=>'PATCH')) !!}
-	  	<h4 class="row">
-	  		{!! Form::label('newStatus', 'Estado',array('class' => 'label label-default col-md-4')); !!}
-	  		<select name="newStatus" id="newStatus" class="col-md-4">
-	  			<option value="Reservada">Reservada</option>
-	  			<option value="Confirmada">Confirmada</option>
-	  			<option value="Cancelada">Cancelada</option>
-					<option value="Atencion realizada">Atencion realizada</option>
-					<option value="Inasistencia">Inasistencia</option>
-	  		</select>
-	  	</h4>
-			<h4 class="row">
-				{!! Form::label('commit', 'Comentario',array('class' => 'label label-default col-md-4')); !!}
-				{!! Form::textarea('commit', null, ['size' => '30x5','id'=>'commit']) !!}
-			</h4>
-			<h4 class="row">
-				<a href="#" id="btnChangeStatus" class="btn btn-primary col-md-3">Actualizar</a>
-			</h4>
-		{!! Form::close() !!}
-	  </div>
-</template>
 
 @endsection
 

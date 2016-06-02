@@ -77,8 +77,8 @@ class ShedulleController extends Controller
 
             $numberOfBlocks = $atention->block_numbers;
 
-            for ($i=0; $i < $numberOfBlocks; $i++) { 
-                
+            for ($i=0; $i < $numberOfBlocks; $i++) {
+
                 $nextBlock = $data['block_id']+$i;
 
                 $insertData = [
@@ -91,7 +91,7 @@ class ShedulleController extends Controller
                 $info = new ReservationInfo($insertData);
 
                 $info->save();
-                
+
             }
 
             return response()->json(["respuesta"=>"Guardado"]);
@@ -172,7 +172,7 @@ class ShedulleController extends Controller
 
                 $numberOfBlocks = $atention->block_numbers;
 
-                for ($i=1; $i < $numberOfBlocks; $i++) { 
+                for ($i=1; $i < $numberOfBlocks; $i++) {
                     $nextBlock = $block+$i;
                     $checkRoom = ReservationInfo::where('reservationDate','=',$date)->where('block_id','=',$nextBlock)->where('room','=',$room)->count();
                     if($checkRoom > 0){
@@ -180,7 +180,7 @@ class ShedulleController extends Controller
                         //que impide hacer la reserva en el bloque seleccionado
                         return response()->json(['estado'=>'invalido','mensaje'=>'La sala esta ocupada']);
                     }
-                    
+
                     $checkMedic = 0;
 
                     foreach ($findMedicConflict as $register) {
@@ -335,7 +335,7 @@ class ShedulleController extends Controller
                             <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                             <th>".$info->Reservation->Atention->name."</th>
                             <th>".$info->Reservation->Medic->name."</th>
-                            <th>".$info->Reservation->status."</th>
+                            <th class='".$info->Reservation->status." statusReservation".$info->Reservation->id."'>".$info->Reservation->status."</th>
                             <th>
                                 <a href='#' class='btn btn-info infoBloque'>+ Info</a>
                                 <a href='#' class='btn btn-warning editBloque'>Editar</a>
@@ -361,7 +361,7 @@ class ShedulleController extends Controller
                         <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                         <th>".$info->Reservation->Atention->name."</th>
                         <th>".$info->Reservation->Medic->name."</th>
-                        <th>".$info->Reservation->status."</th>
+                        <th class='".$info->Reservation->status." statusReservation".$info->Reservation->id."'>".$info->Reservation->status."</th>
                         <th>
                             <a href='#' class='btn btn-info infoBloque'>+ Info</a>
                             <a href='#' class='btn btn-warning editBloque'>Editar</a>

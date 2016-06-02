@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Reservation;
+use App\ReservationLog;
 
 class ReservationController extends Controller
 {
@@ -124,9 +125,32 @@ class ReservationController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        //
+        $user = $request->user();
+
+        //return $user;
+
+        $reservation = Reservation::find($id);
+
+        $prev_status = $reservation->status;
+
         $respuesta = $request->only(['newStatus','commit']);
 
-        return $respuesta;
+        $data_log = [
+          'commit' => $respuesta['commit'],
+          'previus_status' => $reservation->status,
+          'new_status' => $respuesta['newStatus'],
+          'user_id' => $user->id,
+          'reservation_id' => $reservation->id
+        ];
+
+        $log = new ReservationLog($data_log);
+
+        $log->save();
+
+        $reservation->status = $respuesta['newStatus'];
+
+        $reservation->save();
+
+        return response()->json(["respuesta"=>"Actualizado","id"=>$reservation->id,"status"=>$respuesta['newStatus']]);
     }
 }

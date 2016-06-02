@@ -7,6 +7,7 @@
 	<title>Clinica</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{asset('css/clinic.css')}}" media="screen" title="no title" charset="utf-8">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -47,7 +48,7 @@
             }
 
             ?>
-            
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -62,7 +63,7 @@
   <!--calendario-->
   <link type="text/css" rel="stylesheet" href="{{ asset('dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112') }}" media="screen"></LINK>
   <script type="text/javascript" src="{{ asset('dhtmlgoodies_calendar/dhtmlgoodies_calendar.js?random=20060118')}}"></script>
-<!--calendario-->   
+<!--calendario-->
 
 	@yield('scripts')
 </body>

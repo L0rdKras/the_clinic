@@ -158,23 +158,10 @@ var changeStatus = function(){
 
 		$("#idCambiar").val(idReservation);
 
-		/*var form = $("#formDataReservation");
-
-		var ruta = form.attr('action');
-
-		ruta = ruta.replace(':ID',idReservation);*/
-
-		var modalview = $("#modalTemplate").html();
-
-		var modalInfo = $("#cambiarEstado").html();
-
-		//modalInfo = modalInfo.replace(':ID',idReservation);
-
-		modalview = modalview.replace(":MENSAJE",modalInfo);
-
-		$(modalview).modal();
+		$("#modal-for-update").modal();
 
 		$("#newStatus").val(statusReservation);
+		$("#commit").val("");
 	});
 };
 
@@ -196,8 +183,24 @@ var updateStatus = function(){
 
 		//console.log(ruta);
 		$.post(ruta,data,function(response){
-			console.log(response);
-		});
+			//console.log(response);
+			if(response.respuesta==="Actualizado"){
+				$("#modal-for-update").modal('hide');
+				actualizarData(response);
+			}
+		},'json');
 
 	});
+};
+
+var actualizarData = function(data){
+	var objeto = $(".statusReservation"+data.id);
+
+	objeto.removeClass('Confirmada Cancelada Inasistencia Realizada Reservada').addClass(data.status);
+
+	objeto.html(data.status);
+
+	var padre = objeto.parent();
+
+	padre.data('reservationStatus',data.status);
 };

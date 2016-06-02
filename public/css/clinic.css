@@ -1,0 +1,24 @@
+.Confirmada{
+  background-color: orange;
+  color: white;
+}
+
+.Cancelada{
+  background-color: red;
+  color: white;
+}
+
+.Inasistencia{
+  background-color: black;
+  color: red;
+}
+
+.Realizada{
+  background-color: green;
+  color: white;
+}
+
+.Reservada{
+  background-color: rgb(10, 10, 255);
+  color: white;
+}
