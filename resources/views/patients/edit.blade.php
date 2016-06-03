@@ -7,8 +7,8 @@
 
 		<div class="panel-heading">Datos</div>
 		<div class="panel-body">
-        	{!! Form::open(array('id'=>'formPatient','route' => ['guarda-empresa'],'method'=>'POST')) !!}
-       
+        	{!! Form::open(array('id'=>'formPatient','route' => ['patient-update',$patient->id],'method'=>'PATCH')) !!}
+
         		{!! Form::hidden('dataToSave',$dataToSave,array('id'=>'dataToSave')) !!}
 
         		<div class="row">
@@ -73,7 +73,7 @@
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title" id="TituloModal">:TITULO</h4>
 	      </div>
-	      
+
 	      <div class="modal-body" style="height:300px; overflow:auto" id="ver_articulos">
 	        <table class="table table-striped" id="tablaResultado">
 	            <thead>
@@ -83,12 +83,12 @@
 	                <th>Sel.</th>
 	              </tr>
 	            </thead>
-	            
+
 	        </table>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-	        
+
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
@@ -115,7 +115,7 @@
 	      <div class="modal-body">
 	        <p>:MENSAJE</p>
 	      </div>
-	      
+
 	    </div>
 	  </div>
 	</div>
@@ -125,4 +125,8 @@
 {!! Form::close() !!}
 {!! Form::open(array('route' => ['show-incumbents-patients'],'id'=>'formIncumbents','method'=>'GET')) !!}
 {!! Form::close() !!}
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/editPatient.js')}}"></script>
 @endsection

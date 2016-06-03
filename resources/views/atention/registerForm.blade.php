@@ -27,7 +27,7 @@
 					    {!! Form::text('block_numbers',null,array('id'=>'block_numbers','class'=>'col-md-2 campoIngreso')); !!}
 					    </h4>
 				    </div>
-				    
+
 				    <div class="row">
 				    	<h4>
 				    		{!! Form::submit('Guardar',array('id'=>'save_atention','class'=>'btn-success')); !!}
@@ -49,7 +49,7 @@
 	      <div class="modal-body">
 	        <p>:MENSAJE</p>
 	      </div>
-	      
+
 	    </div>
 	  </div>
 	</div>
@@ -90,16 +90,16 @@ var guardarAtention = function(){
 					$(modalWindow).modal();
 				}
 			}else{
-				$("#formAtention .campoIngreso").each(function (index) 
+				$("#formAtention .campoIngreso").each(function (index)
         		{
         			var id_name = this.id;
 
         			showError(id_name,response);
-        			
+
         		});
 			}
 		}).fail(function(){
-			alert("Ocurrio un error al intentar guardar");			
+			alert("Ocurrio un error al intentar guardar");
 		});
 	});
 };

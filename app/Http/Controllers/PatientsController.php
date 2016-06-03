@@ -158,7 +158,93 @@ class PatientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($patient = Patient::find($id)){
+          //return response()->json();
+          $input = $request->only(['firstname','lastname','address','rut','phone','email','type']);
+
+          $data = $request->only(['dataToSave']);
+
+          $rules = [
+            'firstname'=>'required',
+            'lastname'=>'required',
+            'address'=>'required',
+            'rut'=>'required',
+            'phone'=>'required',
+            'email'=>'required|email',
+            'type'=>'required',
+            'company_id'=>'required|numeric'
+          ];
+
+          if($input['type'] == "Titular")
+          {
+            $input['company_id'] = $data['dataToSave'];
+
+            $validation = \Validator::make($input,$rules);
+
+            if($validation->passes())
+            {
+
+              //$patient = new Patient($input);
+              $patient->firstname = $input['firstname'];
+              $patient->lastname = $input['lastname'];
+              $patient->address = $input['address'];
+              $patient->rut = $input['rut'];
+              $patient->phone = $input['phone'];
+              $patient->email = $input['email'];
+              $patient->type = $input['type'];
+              $patient->company_id = $input['company_id'];
+
+              $patient->save();
+
+              return response()->json(["respuesta"=>"Guardado"]);
+            }
+
+            $messages = $validation->errors();
+
+            return response()->json($messages);
+
+
+          }elseif ($input['type'] == "Carga") {
+            $incumbent = Patient::find($data['dataToSave']);
+
+            $input['company_id'] = $incumbent->Company->id;
+
+            $validation = \Validator::make($input,$rules);
+
+            if($validation->passes())
+            {
+
+              $patient->firstname = $input['firstname'];
+              $patient->lastname = $input['lastname'];
+              $patient->address = $input['address'];
+              $patient->rut = $input['rut'];
+              $patient->phone = $input['phone'];
+              $patient->email = $input['email'];
+              $patient->type = $input['type'];
+              $patient->company_id = $input['company_id'];
+
+              $patient->save();
+
+              //crear relacion
+
+              /*$inputRelationship = ['incumbent'=>$incumbent->id,'burden'=>$patient->id];
+
+              $relationship = new Relationship($inputRelationship);
+
+              $relationship->save();*/
+
+              return response()->json(["respuesta"=>"Guardado"]);
+            }
+
+            $messages = $validation->errors();
+
+            return response()->json($messages);
+
+          }else{
+            //error, no especifico el tipo
+          }
+
+        }
     }
 
     /**
