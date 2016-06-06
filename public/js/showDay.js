@@ -9,6 +9,8 @@ $(document).ready(function() {
 
 	updateStatus();
 
+	deleteReservation();
+
 });
 
 var clickHour = function(){
@@ -203,4 +205,40 @@ var actualizarData = function(data){
 	var padre = objeto.parent();
 
 	padre.data('reservationStatus',data.status);
+};
+
+
+var deleteReservation = function(){
+	$("#data-table tbody").on("click",".filaAgenda th .deleteBloque",function(event){
+		event.preventDefault();
+
+		var padre = $(this).parent();
+		var abuelo = $(padre).parent();
+
+		idReservation = abuelo.data('reservationId');
+
+		statusReservation = abuelo.data('reservationStatus');
+
+		//$("#idCambiar").val(idReservation);
+
+		if(confirm("Confirma la eliminacion de este registro?")){
+			var formDelete = $("#formDeleteReservation");
+
+			var ruta = formDelete.attr('action');
+
+			ruta = ruta.replace(':ID', idReservation);
+
+			var data = formDelete.serialize();
+
+			$.post(ruta,data,function(response){
+
+				console.log(response);
+
+				$(".filaReservation"+idReservation).fadeOut();
+			});
+
+		}
+
+
+	});
 };

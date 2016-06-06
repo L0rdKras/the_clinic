@@ -90,6 +90,9 @@
 {!! Form::open(array('route' => ['all-data-reservation',':ID'],'id'=>'formDataReservation')) !!}
 {!! Form::close() !!}
 
+{!! Form::open(array('route' => ['delete-reservation',':ID'],'id'=>'formDeleteReservation')) !!}
+{!! Form::close() !!}
+
 {!! Form::open(array('route' => ['cambia-estado',':ID'],'id'=>'formChangeStatus','method'=>'PATCH')) !!}
 {!! Form::hidden('idCambiar',null,array('id'=>'idCambiar'))!!}
 {!! Form::close() !!}

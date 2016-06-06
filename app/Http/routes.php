@@ -64,6 +64,7 @@ Route::get('agenda/ver/calendario',['as'=>'ver-calendario','uses'=>'ShedulleCont
 Route::get('agenda/tabla/{year}/{month}/{day}/{room}/{medic}', ['as'=>'info-day-room2','uses'=>'ShedulleController@dataOfDayInRoom2']);
 Route::get('reservation/all/data/{id}',['as'=>'all-data-reservation','uses'=>'ReservationController@dataReservation']);
 Route::patch('reservation/update/status/{id}',['as'=>'cambia-estado','uses'=>'ReservationController@updateStatus']);
+Route::post('reservation/delete/{id}',['as'=>'delete-reservation','uses'=>'ShedulleController@destroy']);
 //Presupuesto
 Route::get('presupuesto',['as'=>'presupuesto','uses'=>'BudgetController@index']);
 Route::get('presupuesto/elaborar',['as'=>'crear-presupuesto','uses'=>'BudgetController@create']);

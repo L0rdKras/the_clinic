@@ -27,7 +27,7 @@ class ReservationsInfo extends Migration
             $table->timestamps();
 
             $table->foreign('block_id')->references('id')->on('blocks');
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
 
         });
     }

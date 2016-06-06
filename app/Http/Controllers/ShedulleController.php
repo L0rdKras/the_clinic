@@ -146,7 +146,15 @@ class ShedulleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($reservation = Reservation::find($id)){
+          $reservation->delete();
+
+          return "Deleted";
+        }
+
+        return "Not Found";
+
+        //no encontro la reservacion
     }
 
     public function dataSelection($room,$block,$year,$month,$day,$atention,$medic)
@@ -330,7 +338,7 @@ class ShedulleController extends Controller
                     if($info->Reservation->Medic->id == $medic){
                         //
                         $filas.="
-                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda'>
+                        <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda filaReservation".$info->Reservation->id."'>
                             <th>".$block->startBlock." a ".$block->finishBlock."</th>
                             <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                             <th>".$info->Reservation->Atention->name."</th>
@@ -356,7 +364,7 @@ class ShedulleController extends Controller
                 }else{
 
                     $filas.="
-                    <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda'>
+                    <tr id='".$block->id."' data-id-block='".$block->id."' data-reservation-id='".$info->Reservation->id."' data-reservation-status='".$info->Reservation->status."' class='filaAgenda filaReservation".$info->Reservation->id."'>
                         <th>".$block->startBlock." a ".$block->finishBlock."</th>
                         <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
                         <th>".$info->Reservation->Atention->name."</th>
