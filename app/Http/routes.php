@@ -65,6 +65,7 @@ Route::get('agenda/tabla/{year}/{month}/{day}/{room}/{medic}', ['as'=>'info-day-
 Route::get('reservation/all/data/{id}',['as'=>'all-data-reservation','uses'=>'ReservationController@dataReservation']);
 Route::patch('reservation/update/status/{id}',['as'=>'cambia-estado','uses'=>'ReservationController@updateStatus']);
 Route::post('reservation/delete/{id}',['as'=>'delete-reservation','uses'=>'ShedulleController@destroy']);
+Route::get('agrenda/impresion/dia/{year}/{month}/{day}/{room}',['as'=>'print-day','uses'=>'ShedulleController@printDay']);
 //Presupuesto
 Route::get('presupuesto',['as'=>'presupuesto','uses'=>'BudgetController@index']);
 Route::get('presupuesto/elaborar',['as'=>'crear-presupuesto','uses'=>'BudgetController@create']);

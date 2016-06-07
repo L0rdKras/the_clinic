@@ -393,4 +393,54 @@ class ShedulleController extends Controller
 
         return $filas;
     }
+
+    public function printData($year,$month,$day,$room){
+        //$data = ReservationInfo::where('reservationDate',$date)->get();
+        $date = $year."-".$month."-".$day;
+        $blocks = Block::all();
+
+        $data = ReservationInfo::where('reservationDate',$date)->where('room',$room)->get();
+
+        $filas ="";
+
+        foreach ($blocks as $block) {
+            if(!$data->where('block_id',$block->id)->isEmpty()){
+                $info = $data->where('block_id',$block->id)->first();
+
+                $filas.="
+                <tr>
+                    <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                    <th>".$info->Reservation->Patient->firstname." ".$info->Reservation->Patient->lastname."</th>
+                    <th>".$info->Reservation->Atention->name."</th>
+                    <th>".$info->Reservation->Medic->name."</th>
+                    <th class='".$info->Reservation->status."'>".$info->Reservation->status."</th>
+                </tr>";
+
+
+            }else{
+                $filas.="
+                <tr>
+                    <th>".$block->startBlock." a ".$block->finishBlock."</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>";
+            }
+        }
+
+        return $filas;
+    }
+
+    public function printDay($year,$month,$day,$room){
+
+      $filas = $this->printData($year,$month,$day,$room);
+
+      $view = view('shedulle.printDay', compact('filas','room','year','month','day'));
+
+      $pdf = \App::make('dompdf.wrapper');
+      $pdf->loadHTML($view);
+      //$pdf->loadHTML("<h1>Test $year-$month-$day $room</h1>");
+      return $pdf->setPaper('a4','landscape')->stream();
+    }
 }

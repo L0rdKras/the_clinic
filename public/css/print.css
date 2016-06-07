@@ -1,0 +1,12 @@
+table{
+  width: 100%;
+  font-size: .8rem;
+}
+
+table thead{
+  border: 1px black solid;
+}
+
+table tbody tr{
+  background-color: rgb(102, 180, 255);
+}

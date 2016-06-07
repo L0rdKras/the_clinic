@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	cargaDia();
 
+	imprimirDia();
+
 	//clickHour();
 
 	showInfo();
@@ -58,6 +60,30 @@ var cargaDia = function(){
 			muestraInfoDia(dia,sala,medic);
 		}
 	});
+};
+
+var imprimirDia = function(){
+	$("#btnImprimirDia").on("click",function(e){
+		e.preventDefault();
+		var dia = $("#fechaReserva").val();
+		var sala = $("#sala").val();
+		//var medic = $("#medic").val();
+
+		if(dia !== "" && sala !== ""){
+			printDay(dia,sala);
+		}
+	});
+};
+
+var printDay = function(day,room){
+
+	var ruta = $("#printRoute").val();
+
+	ruta = ruta.replace(':DATE',day);
+	ruta = ruta.replace(':ROOM',room);
+
+	window.open(ruta);
+
 };
 
 var muestraInfoDia = function(dia,sala,medic){
@@ -231,8 +257,6 @@ var deleteReservation = function(){
 			var data = formDelete.serialize();
 
 			$.post(ruta,data,function(response){
-
-				console.log(response);
 
 				$(".filaReservation"+idReservation).fadeOut();
 			});

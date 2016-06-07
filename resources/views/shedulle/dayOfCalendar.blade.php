@@ -45,6 +45,7 @@
         <div class="panel panel-default">
         	<div class="panel-heading">Calendario</div>
   			<div class="panel-body">
+					<input type="hidden" id="printRoute" value="{{route('print-day',[':DATE',':ROOM'])}}">
   				<input type='hidden' name='formato_fecha' id="formato_fecha" value='yyyy/mm/dd'/>
   				Fecha: <input type="text" id="fechaReserva" name="fecha" readonly size="10"/>
   				<button type='button' onclick='displayCalendar(document.getElementById("fechaReserva"),document.getElementById("formato_fecha").value,this)'><span class="glyphicon glyphicon-search"></span></button>
@@ -62,6 +63,7 @@
   					@endforeach
   				</select>
   				<button id="btnCargaDia" class="btn btn-default">Carga</button>
+					<button id="btnImprimirDia" class="btn btn-default">Imprimir</button>
   			</div>
   			<div class="panel-body" id="muestraAgenda">
   				<table class="table table-hover table-bordered" id="data-table">
