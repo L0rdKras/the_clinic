@@ -66,7 +66,7 @@
     </div>
 </div>
 
-	<div class="modal fade" id="modal_buscar">
+<div class="modal fade" id="modal_buscar">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -92,7 +92,7 @@
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
-	</div>
+</div>
 
 <template id="isIncumbent">
 	<h4>

@@ -35,6 +35,7 @@ Route::get('pacientes/lista', ['as'=>'lista-todos-pacientes','uses'=>'PatientsCo
 Route::get('pacientes/data/{id}',['as'=>'patient-data','uses'=>'PatientsController@dataOfPatient']);
 Route::get('pacientes/editar/datos/{id}',['as'=>'patient-edit','uses'=>'PatientsController@edit']);
 Route::patch('pacientes/update/{id}',['as'=>'patient-update','uses'=>'PatientsController@update']);
+Route::get('pacientes/reservas/futuras/{id}',['as'=>'reservas-paciente','uses'=>'PatientsController@pendingReservations']);
 //Empresas
 Route::get('empresas', ['as'=>'empresas','uses'=>'CompanyController@index']);
 Route::get('empresas/registrar', ['as'=>'crear-empresa','uses'=>'CompanyController@create']);

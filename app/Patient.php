@@ -13,6 +13,10 @@ class Patient extends Model {
 	{
 		return $this->belongsTo('App\Company');
 	}
+	public function Reservations()
+	{
+		return $this->hasMany('App\Reservation');
+	}
 
 	public function relationships()
 	{

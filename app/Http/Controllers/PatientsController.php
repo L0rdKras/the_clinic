@@ -308,4 +308,18 @@ class PatientsController extends Controller
 
     }
 
+    public function pendingReservations($id){
+      $patient = Patient::find($id);
+
+      $reservated = $patient->Reservations->where('status','Reservada');
+
+      $confirmated = $patient->Reservations->where('status','Confirmada');
+
+      $reservations = $reservated->merge($confirmated);
+
+      $view = view('patients.listOfReservations',compact('reservations'))->render();
+
+      return response()->json(['respuesta'=>true,'view'=>$view]);
+    }
+
 }
